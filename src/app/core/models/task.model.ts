@@ -1,78 +1,20 @@
-export type TaskStatus = 'todo' | 'inprogress' | 'completed' | 'overdue';
-
-export type TaskPriority = 'low' | 'medium' | 'high';
-
-export type ProjectRole = 'admin' | 'member' | 'observer';
-
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    createdAt?: string;
-}
+import { TaskHistory } from './task-history.model';
 
 export interface Task {
-    id: number;
-    title: string;
+    id: string; // UUID
+    project_id: string; // UUID
+
+    status: 'todo' | 'inprogress' | 'overdue' | 'completed';
+    priority: 'Low' | 'Medium' | 'High';
+
+    assignee_id: string; // UUID
+    name: string;
     description?: string;
-    status: TaskStatus;
-    priority: TaskPriority;
-    assignedTo?: string;
-    assignedToId?: number;
-    author: string;
-    authorId?: number;
-    project: string;
-    projectId?: number;
-    dueDate: string;
-    createdAt?: string;
-    updatedAt?: string;
-    color: string;
+    due_date?: string; // Date string (YYYY-MM-DD)
+    completion_date?: string; // Date string (YYYY-MM-DD)
+    created_at?: string; // ISO timestamp
 }
 
 export interface TaskDetail extends Task {
-    createdAt: string;
-    history: HistoryEntry[];
-}
-
-
-export interface HistoryEntry {
-    id?: number;
-    date: string;
-    user: string;
-    userId?: number;
-    action: string;
-    field?: string;
-    oldValue?: string;
-    newValue?: string;
-}
-
-
-export interface Project {
-    id: number;
-    name: string;
-    description?: string;
-    progress: number;
-    color: string;
-    authorId?: number;
-    createdAt?: string;
-    updatedAt?: string;
-    role?: ProjectRole | string;
-    tasks?: Task[];
-    members?: Member[];
-    observers?: Observer[];
-}
-
-
-export interface Member {
-    id: number;
-    name: string;
-    email?: string;
-    role: ProjectRole;
-    joinedAt?: string;
-    avatar?: string;
-}
-
-
-export interface Observer extends Member {
-    role: 'observer';
+    history: TaskHistory[];
 }

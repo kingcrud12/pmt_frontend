@@ -6,7 +6,7 @@
             <!-- Project Filter -->
             <select class="sort-select" [(ngModel)]="projectFilter" (change)="setProjectFilter(projectFilter)">
                 <option value="all">All Projects</option>
-                <option *ngFor="let project of uniqueProjects.slice(1)" [value]="project">{{ project }}</option>
+                <option *ngFor="let project of uniqueProjectList" [value]="project.id">{{ project.name }}</option>
             </select>
 
             <!-- Sort Filter -->
@@ -55,8 +55,7 @@
 
     <!-- Task Grid -->
     <div class="task-grid">
-        <div class="task-card" *ngFor="let task of filteredTasks" [style.border-left-color]="task.color"
-            (click)="viewTaskDetail(task.id)">
+        <div class="task-card" *ngFor="let task of filteredTasks" (click)="viewTaskDetail(task.id)">
             <!-- Task Header -->
             <div class="task-card__header">
                 <div class="task-card__status">
@@ -83,14 +82,14 @@
                     stroke="currentColor" stroke-width="2">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 </svg>
-                <span class="task-card__project-name">{{ task.project }}</span>
+                <span class="task-card__project-name">{{ getProjectName(task.project_id) }}</span>
             </div>
 
             <!-- Task Content -->
             <div class="task-card__content">
                 <h3 class="task-card__title">
-                    <span class="task-number">#{{ task.id }}</span>
-                    {{ task.title }}
+                    <span class="task-number">#{{ task.id.substring(0, 8) }}</span>
+                    {{ task.name }}
                 </h3>
                 <p class="task-card__description">{{ task.description }}</p>
             </div>
@@ -105,7 +104,7 @@
                         <line x1="8" y1="2" x2="8" y2="6" />
                         <line x1="3" y1="10" x2="21" y2="10" />
                     </svg>
-                    <span>{{ task.dueDate }}</span>
+                    <span>{{ task.due_date }}</span>
                 </div>
                 <div class="task-card__info">
                     <svg class="task-card__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -113,7 +112,7 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                         <circle cx="12" cy="7" r="4" />
                     </svg>
-                    <span>{{ task.assignedTo }}</span>
+                    <span>{{ task.assignee_id }}</span>
                 </div>
             </div>
         </div>
@@ -148,34 +147,21 @@
             <div class="project-list">
                 <div class="project-item" *ngFor="let project of availableProjects"
                     [class.selected]="selectedProjectForTask?.id === project.id" (click)="selectProject(project)">
-                    <div class="project-item__icon" [style.background-color]="project.color">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        </svg>
+                    <div class="project-item__icon" [style.background-color]="'#3b82f6'">
+                        {{ project.name.charAt(0) }}
                     </div>
                     <div class="project-item__info">
                         <h3 class="project-item__name">{{ project.name }}</h3>
                         <p class="project-item__description">{{ project.description }}</p>
-                        <div class="project-item__meta">
-                            <span class="meta-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path d="M9 11l3 3L22 4" />
-                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                                </svg>
-                                {{ project.tasks?.length || 0 }} tasks
-                            </span>
-                            <span class="meta-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                    <circle cx="12" cy="7" r="4" />
-                                </svg>
-                                {{ project.members?.length || 0 }} members
-                            </span>
-                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        <!-- Members count removed as it's not in the strict model yet -->
+                        <span>Members</span>
                     </div>
+
                     <div class="project-item__check" *ngIf="selectedProjectForTask?.id === project.id">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="3">

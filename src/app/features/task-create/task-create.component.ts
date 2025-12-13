@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from '../../core/models/task.model';
+import { Project } from '../../core/models/project.model';
 
 @Component({
   selector: 'app-task-create',
@@ -12,28 +12,33 @@ import { Project } from '../../core/models/task.model';
 })
 export class TaskCreateComponent implements OnInit {
   taskForm: FormGroup;
-  selectedProjectId: number | null = null;
+  selectedProjectId: string | null = null;
   selectedProjectName: string = '';
 
   // Mock Data
   projects: Project[] = [
     {
-      id: 1,
+      id: '123e4567-e89b-12d3-a456-426614174000',
       name: 'Website Revamp',
-      progress: 75,
-      color: '#3b82f6',
-      role: 'Lead Developer'
+      author_id: 'admin-uuid',
+      description: 'Revamping the main website'
     },
     {
-      id: 2,
+      id: '123e4567-e89b-12d3-a456-426614174001',
       name: 'Cloud Migration',
-      progress: 45,
-      color: '#10b981',
-      role: 'Backend Engineer'
+      author_id: 'admin-uuid',
+      description: 'Moving to AWS'
     }
   ];
 
-  users: string[] = ['Alice Dupont', 'Sarah Johnson', 'Mike Wilson', 'Emma', 'Carla'];
+  // Mock Users - In real app, load from UserService
+  users: { id: string, name: string }[] = [
+    { id: 'user-uuid-1', name: 'Alice Dupont' },
+    { id: 'user-uuid-2', name: 'Carla' },
+    { id: 'user-uuid-3', name: 'Sarah Johnson' },
+    { id: 'user-uuid-4', name: 'Mike Wilson' },
+    { id: 'user-uuid-5', name: 'Emma' }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -41,12 +46,12 @@ export class TaskCreateComponent implements OnInit {
     private router: Router
   ) {
     this.taskForm = this.fb.group({
-      title: ['', Validators.required],
+      name: ['', Validators.required],
       description: ['', Validators.required],
-      projectId: [null, Validators.required],
-      priority: ['medium', Validators.required],
-      dueDate: ['', Validators.required],
-      assignedTo: ['', Validators.required]
+      project_id: [null, Validators.required],
+      priority: ['Medium', Validators.required],
+      due_date: ['', Validators.required],
+      assignee_id: ['', Validators.required]
     });
   }
 
@@ -54,12 +59,12 @@ export class TaskCreateComponent implements OnInit {
     // Get projectId from query params
     this.route.queryParams.subscribe(params => {
       if (params['projectId']) {
-        this.selectedProjectId = +params['projectId'];
+        this.selectedProjectId = params['projectId']; // No + conversion
         const project = this.projects.find(p => p.id === this.selectedProjectId);
 
         if (project) {
           this.selectedProjectName = project.name;
-          this.taskForm.patchValue({ projectId: this.selectedProjectId });
+          this.taskForm.patchValue({ project_id: this.selectedProjectId });
         }
       }
     });

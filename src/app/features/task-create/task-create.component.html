@@ -16,16 +16,16 @@
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                         </svg>
                     </div>
-                    <span>{{ selectedProjectName }}</span>
+                    <span>{{ selectedProjectName || 'No Project Selected' }}</span>
                 </div>
             </div>
 
-            <!-- Title -->
+            <!-- Name -->
             <div class="form-group">
-                <label for="title">Task Title</label>
-                <input type="text" id="title" formControlName="title" placeholder="e.g., Design Homepage">
-                <div class="error-message" *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
-                    Title is required
+                <label for="name">Task Name</label>
+                <input type="text" id="name" formControlName="name" placeholder="e.g., Design Homepage">
+                <div class="error-message" *ngIf="taskForm.get('name')?.touched && taskForm.get('name')?.invalid">
+                    Name is required
                 </div>
             </div>
 
@@ -45,18 +45,18 @@
                 <div class="form-group">
                     <label for="priority">Priority</label>
                     <select id="priority" formControlName="priority">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
                     </select>
                 </div>
 
                 <!-- Due Date -->
                 <div class="form-group">
-                    <label for="dueDate">Due Date</label>
-                    <input type="date" id="dueDate" formControlName="dueDate">
+                    <label for="due_date">Due Date</label>
+                    <input type="date" id="due_date" formControlName="due_date">
                     <div class="error-message"
-                        *ngIf="taskForm.get('dueDate')?.touched && taskForm.get('dueDate')?.invalid">
+                        *ngIf="taskForm.get('due_date')?.touched && taskForm.get('due_date')?.invalid">
                         Due date is required
                     </div>
                 </div>
@@ -64,13 +64,13 @@
 
             <!-- Assigned To -->
             <div class="form-group">
-                <label for="assignedTo">Assign To</label>
-                <select id="assignedTo" formControlName="assignedTo">
+                <label for="assignee_id">Assign To</label>
+                <select id="assignee_id" formControlName="assignee_id">
                     <option value="">Select a user</option>
-                    <option *ngFor="let user of users" [value]="user">{{ user }}</option>
+                    <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
                 </select>
                 <div class="error-message"
-                    *ngIf="taskForm.get('assignedTo')?.touched && taskForm.get('assignedTo')?.invalid">
+                    *ngIf="taskForm.get('assignee_id')?.touched && taskForm.get('assignee_id')?.invalid">
                     Assignee is required
                 </div>
             </div>

@@ -10,7 +10,7 @@
             <button class="tab" [class.tab--active]="activeTab === 'todo'" (click)="setActiveTab('todo')">
                 To Do
             </button>
-            <button class="tab" [class.tab--active]="activeTab === 'in-progress'" (click)="setActiveTab('in-progress')">
+            <button class="tab" [class.tab--active]="activeTab === 'inprogress'" (click)="setActiveTab('inprogress')">
                 In Progress
             </button>
             <button class="tab tab--with-badge" [class.tab--active]="activeTab === 'overdue'"
@@ -22,15 +22,15 @@
 
         <!-- Task Cards -->
         <div class="task-list">
-            <div class="task-card" *ngFor="let task of filteredTasks" [style.border-left-color]="task.color">
-                <h3 class="task-card__title">{{ task.title }}</h3>
+            <div class="task-card" *ngFor="let task of filteredTasks">
+                <h3 class="task-card__title">{{ task.name }}</h3>
                 <div class="task-card__meta">
                     <div class="task-card__info">
                         <svg class="task-card__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                         </svg>
-                        <span>Project: {{ task.project }}</span>
+                        <span>Project: {{ getProjectName(task.project_id) }}</span>
                     </div>
                     <div class="task-card__info">
                         <svg class="task-card__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -40,10 +40,10 @@
                             <line x1="8" y1="2" x2="8" y2="6" />
                             <line x1="3" y1="10" x2="21" y2="10" />
                         </svg>
-                        <span>Due: {{ task.dueDate }}</span>
+                        <span>Due: {{ task.due_date }}</span>
                     </div>
                     <div class="task-card__info">
-                        <span>Assigned by: {{ task.assignedTo }}</span>
+                        <span>Assigned to: {{ getUserName(task.assignee_id) }}</span>
                     </div>
                 </div>
             </div>
@@ -74,15 +74,9 @@
             <div class="project-card" *ngFor="let project of projects">
                 <div class="project-card__header">
                     <h4 class="project-card__name">{{ project.name }}</h4>
-                    <span class="project-card__progress-text">{{ project.progress }}%</span>
                 </div>
                 <div class="project-card__body">
-                    <div class="progress-bar">
-                        <div class="progress-bar__fill" [style.width.%]="project.progress"
-                            [style.background-color]="project.color">
-                        </div>
-                    </div>
-                    <span class="project-card__role">Role: {{ project.role }}</span>
+                    <p>{{ project.description }}</p>
                 </div>
             </div>
         </div>
