@@ -7,10 +7,10 @@
                 [class.project-item--active]="project.id === selectedProjectId" (click)="selectProject(project.id)">
                 <div class="project-item__header">
                     <span class="project-item__name">{{ project.name }}</span>
-                    <span class="project-item__progress">{{ project.progress }}%</span>
+                    <span class="project-item__progress">{{ getProjectProgress(project.id) }}%</span>
                 </div>
                 <div class="progress-bar-mini">
-                    <div class="progress-bar-mini__fill" [style.width.%]="project.progress"></div>
+                    <div class="progress-bar-mini__fill" [style.width.%]="getProjectProgress(project.id)"></div>
                 </div>
             </button>
         </div>
@@ -34,9 +34,10 @@
                 <p class="project-description">{{ selectedProject.description }}</p>
                 <div class="project-progress">
                     <div class="progress-bar-large">
-                        <div class="progress-bar-large__fill" [style.width.%]="selectedProject.progress"></div>
+                        <div class="progress-bar-large__fill" [style.width.%]="getProjectProgress(selectedProject.id)">
+                        </div>
                     </div>
-                    <span class="progress-text">{{ selectedProject.progress }}% Complete</span>
+                    <span class="progress-text">{{ getProjectProgress(selectedProject.id) }}% Complete</span>
                 </div>
             </div>
             <div class="project-header__stats">
@@ -101,8 +102,8 @@
                                     }}</span>
                             </div>
                             <h5 class="task-item__title">
-                                <span class="task-number">#{{ task.id }}</span>
-                                {{ task.title }}
+                                <span class="task-number">#{{ task.id.substring(0, 8) }}</span>
+                                {{ task.name }}
                             </h5>
                             <p class="task-item__description">{{ task.description }}</p>
                             <div class="task-item__meta">
@@ -112,7 +113,7 @@
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                                         <circle cx="12" cy="7" r="4" />
                                     </svg>
-                                    {{ task.assignedTo }}
+                                    {{ getUserName(task.assignee_id) }}
                                 </span>
                                 <span class="task-meta">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -122,7 +123,7 @@
                                         <line x1="8" y1="2" x2="8" y2="6" />
                                         <line x1="3" y1="10" x2="21" y2="10" />
                                     </svg>
-                                    {{ task.dueDate }}
+                                    {{ task.due_date }}
                                 </span>
                             </div>
                         </div>
@@ -142,8 +143,8 @@
                                     }}</span>
                             </div>
                             <h5 class="task-item__title">
-                                <span class="task-number">#{{ task.id }}</span>
-                                {{ task.title }}
+                                <span class="task-number">#{{ task.id.substring(0, 8) }}</span>
+                                {{ task.name }}
                             </h5>
                             <p class="task-item__description">{{ task.description }}</p>
                             <div class="task-item__meta">
@@ -155,7 +156,7 @@
                                         <line x1="8" y1="2" x2="8" y2="6" />
                                         <line x1="3" y1="10" x2="21" y2="10" />
                                     </svg>
-                                    {{ task.dueDate }}
+                                    {{ task.due_date }}
                                 </span>
                             </div>
                         </div>
@@ -215,7 +216,7 @@
                 <!-- Members Card -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Members ({{ selectedProject.members?.length || 0 }})</h3>
+                        <h3 class="card-title">Members ({{ currentProjectMembers.length }})</h3>
                         <button class="btn-add" (click)="openAddMemberModal()">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2">
@@ -224,24 +225,23 @@
                             Add Member
                         </button>
                     </div>
-                    <div class="member-list" *ngIf="selectedProject.members && selectedProject.members.length > 0">
-                        <div class="member-item" *ngFor="let member of selectedProject.members">
-                            <div class="member-avatar">{{ getInitials(member.name) }}</div>
+                    <div class="member-list" *ngIf="currentProjectMembers.length > 0">
+                        <div class="member-item" *ngFor="let member of currentProjectMembers">
+                            <div class="member-avatar">{{ getInitials(getUserName(member.user_id)) }}</div>
                             <div class="member-info">
-                                <span class="member-name">{{ member.name }}</span>
+                                <span class="member-name">{{ getUserName(member.user_id) }}</span>
                                 <span class="member-role">{{ member.role }}</span>
                             </div>
                         </div>
                     </div>
-                    <p class="empty-message" *ngIf="!selectedProject.members || selectedProject.members.length === 0">No
-                        members yet</p>
+                    <p class="empty-message" *ngIf="currentProjectMembers.length === 0">No members yet</p>
                 </div>
 
                 <!-- Observers Section -->
                 <!-- Observers Card -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Observers ({{ selectedProject.observers?.length || 0 }})</h3>
+                        <h3 class="card-title">Observers ({{ currentProjectObservers.length }})</h3>
                         <button class="btn-add" (click)="openAddObserverModal()">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2">
@@ -250,21 +250,19 @@
                             Add Observer
                         </button>
                     </div>
-                    <div class="member-list" *ngIf="selectedProject.observers && selectedProject.observers.length > 0">
-                        <div class="member-item" *ngFor="let observer of selectedProject.observers">
-                            <div class="member-avatar">{{ getInitials(observer.name) }}</div>
+                    <div class="member-list" *ngIf="currentProjectObservers.length > 0">
+                        <div class="member-item" *ngFor="let observer of currentProjectObservers">
+                            <div class="member-avatar">{{ getInitials(getUserName(observer.user_id)) }}</div>
                             <div class="member-info">
-                                <span class="member-name">{{ observer.name }}</span>
+                                <span class="member-name">{{ getUserName(observer.user_id) }}</span>
                                 <span class="member-role">{{ observer.role }}</span>
                             </div>
                         </div>
                     </div>
-                    <p class="empty-message"
-                        *ngIf="!selectedProject.observers || selectedProject.observers.length === 0">No observers yet
+                    <p class="empty-message" *ngIf="currentProjectObservers.length === 0">No observers yet
                     </p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-```
+    ```

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TaskDetail, HistoryEntry } from '../../core/models/task.model';
+import { TaskDetail } from '../../core/models/task.model';
+import { TaskHistory } from '../../core/models/task-history.model';
 
 @Component({
   selector: 'app-task-detail',
@@ -10,45 +11,38 @@ import { TaskDetail, HistoryEntry } from '../../core/models/task.model';
   styleUrl: './task-detail.component.css'
 })
 export class TaskDetailComponent implements OnInit {
-  taskId: number | null = null;
+  taskId: string | null = null;
   task: TaskDetail | null = null;
 
   // Mock data - in real app, this would come from a service
   private tasks: TaskDetail[] = [
     {
-      id: 1,
-      title: 'Design Homepage UI',
-      description: 'Create modern homepage design with new branding. The design should include a hero section, feature highlights, testimonials, and a clear call-to-action. Use the new color palette and ensure mobile responsiveness.',
+      id: '550e8400-e29b-41d4-a716-446655440000',
+      name: 'Design Homepage UI',
+      description: 'Create modern homepage design with new branding.',
       status: 'overdue',
-      priority: 'high',
-      assignedTo: 'Alice Dupont',
-      author: 'John Doe',
-      project: 'Website Revamp',
-      createdAt: 'Oct 1, 2024',
-      dueDate: 'Oct 20, 2024',
-      color: '#ef4444',
+      priority: 'High',
+      assignee_id: 'user-uuid-1',
+      project_id: '123e4567-e89b-12d3-a456-426614174000',
+      created_at: '2024-10-01',
+      due_date: '2024-10-20',
       history: [
-        { date: 'Oct 1, 2024 10:30', user: 'John Doe', action: 'Created task' },
-        { date: 'Oct 5, 2024 14:20', user: 'John Doe', action: 'Assigned to', field: 'assignedTo', oldValue: 'Unassigned', newValue: 'Alice Dupont' },
-        { date: 'Oct 10, 2024 09:15', user: 'Alice Dupont', action: 'Updated', field: 'description', oldValue: 'Create homepage design', newValue: 'Create modern homepage design with new branding' },
-        { date: 'Oct 15, 2024 16:45', user: 'Alice Dupont', action: 'Changed priority', field: 'priority', oldValue: 'medium', newValue: 'high' }
-      ]
-    },
-    {
-      id: 3,
-      title: 'Setup Database Schema',
-      description: 'Design and implement database structure for the new cloud migration project. Include tables for users, projects, tasks, and relationships.',
-      status: 'todo',
-      priority: 'medium',
-      assignedTo: 'Alice Dupont',
-      author: 'Sarah Johnson',
-      project: 'Cloud Migration',
-      createdAt: 'Oct 15, 2024',
-      dueDate: 'Nov 15, 2024',
-      color: '#3b82f6',
-      history: [
-        { date: 'Oct 15, 2024 11:00', user: 'Sarah Johnson', action: 'Created task' },
-        { date: 'Oct 16, 2024 09:30', user: 'Sarah Johnson', action: 'Assigned to', field: 'assignedTo', oldValue: 'Unassigned', newValue: 'Alice Dupont' }
+        {
+          id: 'hist-1',
+          task_id: '550e8400-e29b-41d4-a716-446655440000',
+          modifier_id: 'user-uuid-admin',
+          change_type: 'Created task',
+          modified_at: '2024-10-01T10:30:00'
+        },
+        {
+          id: 'hist-2',
+          task_id: '550e8400-e29b-41d4-a716-446655440000',
+          modifier_id: 'user-uuid-admin',
+          change_type: 'Assigned to',
+          old_value: 'Unassigned',
+          new_value: 'Alice Dupont',
+          modified_at: '2024-10-05T14:20:00'
+        }
       ]
     }
   ];
@@ -60,7 +54,7 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.taskId = +params['id'];
+      this.taskId = params['id'];
       this.loadTask();
     });
   }

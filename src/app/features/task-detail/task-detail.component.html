@@ -35,8 +35,8 @@
             <!-- Title and Badges -->
             <div class="task-title-section">
                 <h1 class="task-title">
-                    <span class="task-id">#{{ task.id }}</span>
-                    {{ task.title }}
+                    <span class="task-id">#{{ task.id.substring(0, 8) }}</span>
+                    {{ task.name }}
                 </h1>
                 <div class="task-badges">
                     <span class="status-badge" [class]="getStatusClass(task.status)">
@@ -62,19 +62,18 @@
                         <div class="history-dot"></div>
                         <div class="history-content">
                             <div class="history-header">
-                                <span class="history-user">{{ entry.user }}</span>
-                                <span class="history-date">{{ entry.date }}</span>
+                                <span class="history-user">{{ entry.modifier_id }}</span>
+                                <span class="history-date">{{ entry.modified_at | date:'short' }}</span>
                             </div>
                             <div class="history-action">
-                                {{ entry.action }}
-                                <span *ngIf="entry.field" class="history-change">
-                                    <strong>{{ entry.field }}</strong>
-                                    <span *ngIf="entry.oldValue" class="history-old">{{ entry.oldValue }}</span>
+                                {{ entry.change_type }}
+                                <span *ngIf="entry.old_value || entry.new_value" class="history-change">
+                                    <span *ngIf="entry.old_value" class="history-old">{{ entry.old_value }}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2">
                                         <path d="M5 12h14M12 5l7 7-7 7" />
                                     </svg>
-                                    <span *ngIf="entry.newValue" class="history-new">{{ entry.newValue }}</span>
+                                    <span *ngIf="entry.new_value" class="history-new">{{ entry.new_value }}</span>
                                 </span>
                             </div>
                         </div>
@@ -97,18 +96,7 @@
                             </svg>
                             Project
                         </span>
-                        <span class="info-value">{{ task.project }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                <circle cx="12" cy="7" r="4" />
-                            </svg>
-                            Author
-                        </span>
-                        <span class="info-value">{{ task.author }}</span>
+                        <span class="info-value">{{ task.project_id }}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">
@@ -119,7 +107,7 @@
                             </svg>
                             Assigned To
                         </span>
-                        <span class="info-value">{{ task.assignedTo || 'Unassigned' }}</span>
+                        <span class="info-value">{{ task.assignee_id || 'Unassigned' }}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">
@@ -132,7 +120,7 @@
                             </svg>
                             Created
                         </span>
-                        <span class="info-value">{{ task.createdAt }}</span>
+                        <span class="info-value">{{ task.created_at ?? '' | date }}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">
@@ -143,7 +131,7 @@
                             </svg>
                             Due Date
                         </span>
-                        <span class="info-value" [class.overdue]="task.status === 'overdue'">{{ task.dueDate }}</span>
+                        <span class="info-value" [class.overdue]="task.status === 'overdue'">{{ task.due_date }}</span>
                     </div>
                 </div>
             </div>
