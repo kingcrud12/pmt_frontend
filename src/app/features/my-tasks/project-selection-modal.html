@@ -1,0 +1,63 @@
+<!-- Project Selection Modal -->
+<div class="modal-overlay" *ngIf="showProjectSelectionModal" (click)="closeProjectSelectionModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>Select a Project</h2>
+            <button class="btn-close" (click)="closeProjectSelectionModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-description">Choose the project for your new task</p>
+            <div class="project-list">
+                <div class="project-item" *ngFor="let project of availableProjects"
+                    [class.selected]="selectedProjectForTask?.id === project.id" (click)="selectProject(project)">
+                    <div class="project-item__icon" [style.background-color]="project.color">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        </svg>
+                    </div>
+                    <div class="project-item__info">
+                        <h3 class="project-item__name">{{ project.name }}</h3>
+                        <p class="project-item__description">{{ project.description }}</p>
+                        <div class="project-item__meta">
+                            <span class="meta-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M9 11l3 3L22 4" />
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                                </svg>
+                                {{ project.tasks?.length || 0 }} tasks
+                            </span>
+                            <span class="meta-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                                {{ project.members?.length || 0 }} members
+                            </span>
+                        </div>
+                    </div>
+                    <div class="project-item__check" *ngIf="selectedProjectForTask?.id === project.id">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-secondary" (click)="closeProjectSelectionModal()">Cancel</button>
+            <button class="btn-primary" [disabled]="!selectedProjectForTask" (click)="confirmProjectSelection()">
+                Continue
+            </button>
+        </div>
+    </div>
+</div>

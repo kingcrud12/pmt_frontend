@@ -1,0 +1,52 @@
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar-large">
+                {{ user.firstName[0] }}{{ user.lastName[0] }}
+            </div>
+            <h2>My Profile</h2>
+            <p>Manage your account information</p>
+        </div>
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+            <!-- Read-only Fields -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" formControlName="firstName" class="read-only">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" formControlName="lastName" class="read-only">
+                </div>
+            </div>
+
+            <!-- Editable Fields -->
+            <div class="form-group">
+                <label for="jobTitle">Job Title / Function</label>
+                <input type="text" id="jobTitle" formControlName="jobTitle" placeholder="e.g., Senior Developer">
+                <div class="error-message"
+                    *ngIf="profileForm.get('jobTitle')?.touched && profileForm.get('jobTitle')?.invalid">
+                    Job title is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" formControlName="password" placeholder="Enter new password">
+                <p class="field-hint">Minimum 8 characters</p>
+                <div class="error-message"
+                    *ngIf="profileForm.get('password')?.touched && profileForm.get('password')?.invalid">
+                    Password is required (min 8 chars)
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" (click)="onCancel()">Cancel</button>
+                <button type="submit" class="btn-primary" [disabled]="profileForm.invalid || profileForm.pristine">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

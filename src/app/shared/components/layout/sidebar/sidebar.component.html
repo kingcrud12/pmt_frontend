@@ -1,0 +1,32 @@
+<aside class="sidebar">
+  <div class="sidebar__header">
+    <div class="sidebar__logo">
+      <svg class="sidebar__logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3" />
+        <path
+          d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
+      </svg>
+      <app-text size="lg" weight="bold" class="sidebar__logo-text">PMT</app-text>
+    </div>
+  </div>
+
+  <nav class="sidebar__nav">
+    <a routerLink="/tasks" routerLinkActive="sidebar__nav-item--active" class="sidebar__nav-item">
+      <app-text>My Tasks</app-text>
+    </a>
+    <a routerLink="/projects" routerLinkActive="sidebar__nav-item--active" class="sidebar__nav-item">
+      <app-text>Dashboard</app-text>
+    </a>
+  </nav>
+
+  <div class="sidebar__footer">
+    <button class="sidebar__create-btn">
+      <svg class="sidebar__create-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12h14" />
+      </svg>
+      <app-text weight="medium">Create Project</app-text>
+    </button>
+  </div>
+</aside>

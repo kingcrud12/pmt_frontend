@@ -1,0 +1,47 @@
+.app-text {
+  display: inline-block;
+}
+
+/* Sizes */
+.app-text--xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.app-text--sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.app-text--md {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.app-text--lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.app-text--xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+/* Weights */
+.app-text--normal {
+  font-weight: 400;
+}
+
+.app-text--medium {
+  font-weight: 500;
+}
+
+.app-text--semibold {
+  font-weight: 600;
+}
+
+.app-text--bold {
+  font-weight: 700;
+}
+

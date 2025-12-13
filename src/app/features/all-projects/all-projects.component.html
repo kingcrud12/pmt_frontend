@@ -1,0 +1,270 @@
+<div class="all-projects" *ngIf="selectedProject">
+    <!-- Project Selector -->
+    <div class="project-selector">
+        <h2 class="selector-title">Projects</h2>
+        <div class="project-list">
+            <button *ngFor="let project of projects" class="project-item"
+                [class.project-item--active]="project.id === selectedProjectId" (click)="selectProject(project.id)">
+                <div class="project-item__header">
+                    <span class="project-item__name">{{ project.name }}</span>
+                    <span class="project-item__progress">{{ project.progress }}%</span>
+                </div>
+                <div class="progress-bar-mini">
+                    <div class="progress-bar-mini__fill" [style.width.%]="project.progress"></div>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Project Header -->
+        <div class="project-header">
+            <div class="project-header__info">
+                <div class="project-header__title-row">
+                    <h1 class="project-title">{{ selectedProject.name }}</h1>
+                    <button class="btn-add-task" (click)="addTask()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        Add a task
+                    </button>
+                </div>
+                <p class="project-description">{{ selectedProject.description }}</p>
+                <div class="project-progress">
+                    <div class="progress-bar-large">
+                        <div class="progress-bar-large__fill" [style.width.%]="selectedProject.progress"></div>
+                    </div>
+                    <span class="progress-text">{{ selectedProject.progress }}% Complete</span>
+                </div>
+            </div>
+            <div class="project-header__stats">
+                <div class="stat-box">
+                    <span class="stat-box__value">{{ taskStats.total }}</span>
+                    <span class="stat-box__label">Total Tasks</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-box__value">{{ taskStats.completed }}</span>
+                    <span class="stat-box__label">Completed</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-box__value">{{ taskStats.inprogress }}</span>
+                    <span class="stat-box__label">In Progress</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Left: Tasks Section -->
+            <div class="tasks-section">
+                <!-- Filter Controls -->
+                <div class="filter-controls">
+                    <h3 class="section-title">Tasks</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn" [class.filter-btn--active]="taskFilter === 'all'"
+                            (click)="setTaskFilter('all')">
+                            All ({{ taskStats.total }})
+                        </button>
+                        <button class="filter-btn filter-btn--todo" [class.filter-btn--active]="taskFilter === 'todo'"
+                            (click)="setTaskFilter('todo')">
+                            To Do ({{ taskStats.todo }})
+                        </button>
+                        <button class="filter-btn filter-btn--inprogress"
+                            [class.filter-btn--active]="taskFilter === 'inprogress'"
+                            (click)="setTaskFilter('inprogress')">
+                            In Progress ({{ taskStats.inprogress }})
+                        </button>
+                        <button class="filter-btn filter-btn--completed"
+                            [class.filter-btn--active]="taskFilter === 'completed'"
+                            (click)="setTaskFilter('completed')">
+                            Completed ({{ taskStats.completed }})
+                        </button>
+                        <button class="filter-btn filter-btn--overdue"
+                            [class.filter-btn--active]="taskFilter === 'overdue'" (click)="setTaskFilter('overdue')">
+                            Overdue ({{ taskStats.overdue }})
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Assigned Tasks -->
+                <div class="task-group" *ngIf="assignedTasks.length > 0">
+                    <h4 class="task-group__title">Assigned Tasks ({{ assignedTasks.length }})</h4>
+                    <div class="task-list">
+                        <div class="task-item" *ngFor="let task of assignedTasks" (click)="viewTaskDetail(task.id)">
+                            <div class="task-item__header">
+                                <span class="task-status" [class]="'task-status--' + task.status">
+                                    {{ task.status === 'inprogress' ? 'In Progress' : task.status }}
+                                </span>
+                                <span class="task-priority" [class]="'task-priority--' + task.priority">{{ task.priority
+                                    }}</span>
+                            </div>
+                            <h5 class="task-item__title">
+                                <span class="task-number">#{{ task.id }}</span>
+                                {{ task.title }}
+                            </h5>
+                            <p class="task-item__description">{{ task.description }}</p>
+                            <div class="task-item__meta">
+                                <span class="task-meta">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    {{ task.assignedTo }}
+                                </span>
+                                <span class="task-meta">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                    </svg>
+                                    {{ task.dueDate }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unassigned Tasks -->
+                <div class="task-group" *ngIf="unassignedTasks.length > 0">
+                    <h4 class="task-group__title">Unassigned Tasks ({{ unassignedTasks.length }})</h4>
+                    <div class="task-list">
+                        <div class="task-item" *ngFor="let task of unassignedTasks" (click)="viewTaskDetail(task.id)">
+                            <div class="task-item__header">
+                                <span class="task-status" [class]="'task-status--' + task.status">
+                                    {{ task.status === 'inprogress' ? 'In Progress' : task.status }}
+                                </span>
+                                <span class="task-priority" [class]="'task-priority--' + task.priority">{{ task.priority
+                                    }}</span>
+                            </div>
+                            <h5 class="task-item__title">
+                                <span class="task-number">#{{ task.id }}</span>
+                                {{ task.title }}
+                            </h5>
+                            <p class="task-item__description">{{ task.description }}</p>
+                            <div class="task-item__meta">
+                                <span class="task-meta">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                    </svg>
+                                    {{ task.dueDate }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Analytics & Members -->
+            <div class="sidebar-section">
+                <!-- Analytics Chart -->
+                <div class="analytics-card">
+                    <h3 class="card-title">Task Distribution</h3>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 200" class="donut-chart">
+                            <!-- Completed -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#10b981" stroke-width="40"
+                                [attr.stroke-dasharray]="(taskStats.completed / taskStats.total * 251.2) + ' 251.2'"
+                                stroke-dashoffset="0" transform="rotate(-90 100 100)" />
+                            <!-- In Progress -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#f59e0b" stroke-width="40"
+                                [attr.stroke-dasharray]="(taskStats.inprogress / taskStats.total * 251.2) + ' 251.2'"
+                                [attr.stroke-dashoffset]="-(taskStats.completed / taskStats.total * 251.2)"
+                                transform="rotate(-90 100 100)" />
+                            <!-- To Do -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#3b82f6" stroke-width="40"
+                                [attr.stroke-dasharray]="(taskStats.todo / taskStats.total * 251.2) + ' 251.2'"
+                                [attr.stroke-dashoffset]="-((taskStats.completed + taskStats.inprogress) / taskStats.total * 251.2)"
+                                transform="rotate(-90 100 100)" />
+                            <!-- Overdue -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#ef4444" stroke-width="40"
+                                [attr.stroke-dasharray]="(taskStats.overdue / taskStats.total * 251.2) + ' 251.2'"
+                                [attr.stroke-dashoffset]="-((taskStats.completed + taskStats.inprogress + taskStats.todo) / taskStats.total * 251.2)"
+                                transform="rotate(-90 100 100)" />
+                        </svg>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: #10b981;"></span>
+                            <span class="legend-label">Completed: {{ taskStats.completed }}</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: #f59e0b;"></span>
+                            <span class="legend-label">In Progress: {{ taskStats.inprogress }}</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: #3b82f6;"></span>
+                            <span class="legend-label">To Do: {{ taskStats.todo }}</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: #ef4444;"></span>
+                            <span class="legend-label">Overdue: {{ taskStats.overdue }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Members Section -->
+                <!-- Members Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Members ({{ selectedProject.members?.length || 0 }})</h3>
+                        <button class="btn-add" (click)="openAddMemberModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12h14" />
+                            </svg>
+                            Add Member
+                        </button>
+                    </div>
+                    <div class="member-list" *ngIf="selectedProject.members && selectedProject.members.length > 0">
+                        <div class="member-item" *ngFor="let member of selectedProject.members">
+                            <div class="member-avatar">{{ getInitials(member.name) }}</div>
+                            <div class="member-info">
+                                <span class="member-name">{{ member.name }}</span>
+                                <span class="member-role">{{ member.role }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="empty-message" *ngIf="!selectedProject.members || selectedProject.members.length === 0">No
+                        members yet</p>
+                </div>
+
+                <!-- Observers Section -->
+                <!-- Observers Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Observers ({{ selectedProject.observers?.length || 0 }})</h3>
+                        <button class="btn-add" (click)="openAddObserverModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12h14" />
+                            </svg>
+                            Add Observer
+                        </button>
+                    </div>
+                    <div class="member-list" *ngIf="selectedProject.observers && selectedProject.observers.length > 0">
+                        <div class="member-item" *ngFor="let observer of selectedProject.observers">
+                            <div class="member-avatar">{{ getInitials(observer.name) }}</div>
+                            <div class="member-info">
+                                <span class="member-name">{{ observer.name }}</span>
+                                <span class="member-role">{{ observer.role }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="empty-message"
+                        *ngIf="!selectedProject.observers || selectedProject.observers.length === 0">No observers yet
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+```

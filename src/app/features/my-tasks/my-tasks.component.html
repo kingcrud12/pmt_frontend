@@ -1,0 +1,195 @@
+<div class="my-tasks">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 class="page-title">My Tasks</h1>
+        <div class="page-actions">
+            <!-- Project Filter -->
+            <select class="sort-select" [(ngModel)]="projectFilter" (change)="setProjectFilter(projectFilter)">
+                <option value="all">All Projects</option>
+                <option *ngFor="let project of uniqueProjects.slice(1)" [value]="project">{{ project }}</option>
+            </select>
+
+            <!-- Sort Filter -->
+            <select class="sort-select" [(ngModel)]="sortBy" (change)="setSortBy(sortBy)">
+                <option value="dueDate">Sort by Due Date</option>
+                <option value="priority">Sort by Priority</option>
+                <option value="project">Sort by Project</option>
+            </select>
+
+            <!-- Add Task Button -->
+            <button class="btn-primary" (click)="openProjectSelectionModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+                Add a task
+            </button>
+        </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+        <button class="filter-tab" [class.filter-tab--active]="taskFilter === 'all'" (click)="setFilter('all')">
+            All Tasks
+            <span class="filter-tab__count">{{ taskCounts.all }}</span>
+        </button>
+        <button class="filter-tab" [class.filter-tab--active]="taskFilter === 'todo'" (click)="setFilter('todo')">
+            To Do
+            <span class="filter-tab__count">{{ taskCounts.todo }}</span>
+        </button>
+        <button class="filter-tab" [class.filter-tab--active]="taskFilter === 'inprogress'"
+            (click)="setFilter('inprogress')">
+            In Progress
+            <span class="filter-tab__count">{{ taskCounts.inProgress }}</span>
+        </button>
+        <button class="filter-tab" [class.filter-tab--active]="taskFilter === 'overdue'" (click)="setFilter('overdue')">
+            Overdue
+            <span class="filter-tab__count filter-tab__count--danger">{{ taskCounts.overdue }}</span>
+        </button>
+        <button class="filter-tab" [class.filter-tab--active]="taskFilter === 'completed'"
+            (click)="setFilter('completed')">
+            Completed
+            <span class="filter-tab__count">{{ taskCounts.completed }}</span>
+        </button>
+    </div>
+
+    <!-- Task Grid -->
+    <div class="task-grid">
+        <div class="task-card" *ngFor="let task of filteredTasks" [style.border-left-color]="task.color"
+            (click)="viewTaskDetail(task.id)">
+            <!-- Task Header -->
+            <div class="task-card__header">
+                <div class="task-card__status">
+                    <span class="status-badge" [class]="'status-badge--' + task.status">
+                        {{ task.status === 'inprogress' ? 'In Progress' : task.status }}
+                    </span>
+                    <span class="priority-badge" [class]="'priority-badge--' + task.priority">
+                        {{ task.priority }}
+                    </span>
+                </div>
+                <button class="task-card__menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="1" />
+                        <circle cx="12" cy="5" r="1" />
+                        <circle cx="12" cy="19" r="1" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Project Badge -->
+            <div class="task-card__project">
+                <svg class="task-card__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                </svg>
+                <span class="task-card__project-name">{{ task.project }}</span>
+            </div>
+
+            <!-- Task Content -->
+            <div class="task-card__content">
+                <h3 class="task-card__title">
+                    <span class="task-number">#{{ task.id }}</span>
+                    {{ task.title }}
+                </h3>
+                <p class="task-card__description">{{ task.description }}</p>
+            </div>
+
+            <!-- Task Meta -->
+            <div class="task-card__meta">
+                <div class="task-card__info">
+                    <svg class="task-card__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    <span>{{ task.dueDate }}</span>
+                </div>
+                <div class="task-card__info">
+                    <svg class="task-card__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span>{{ task.assignedTo }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredTasks.length === 0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4" />
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+        </svg>
+        <h3>No tasks found</h3>
+        <p>There are no tasks matching your current filter.</p>
+    </div>
+</div>
+
+<!-- Project Selection Modal -->
+<div class="modal-overlay" *ngIf="showProjectSelectionModal" (click)="closeProjectSelectionModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>Select a Project</h2>
+            <button class="btn-close" (click)="closeProjectSelectionModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-description">Choose the project for your new task</p>
+            <div class="project-list">
+                <div class="project-item" *ngFor="let project of availableProjects"
+                    [class.selected]="selectedProjectForTask?.id === project.id" (click)="selectProject(project)">
+                    <div class="project-item__icon" [style.background-color]="project.color">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        </svg>
+                    </div>
+                    <div class="project-item__info">
+                        <h3 class="project-item__name">{{ project.name }}</h3>
+                        <p class="project-item__description">{{ project.description }}</p>
+                        <div class="project-item__meta">
+                            <span class="meta-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M9 11l3 3L22 4" />
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                                </svg>
+                                {{ project.tasks?.length || 0 }} tasks
+                            </span>
+                            <span class="meta-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                                {{ project.members?.length || 0 }} members
+                            </span>
+                        </div>
+                    </div>
+                    <div class="project-item__check" *ngIf="selectedProjectForTask?.id === project.id">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-secondary" (click)="closeProjectSelectionModal()">Cancel</button>
+            <button class="btn-primary" [disabled]="!selectedProjectForTask" (click)="confirmProjectSelection()">
+                Continue
+            </button>
+        </div>
+    </div>
+</div>
