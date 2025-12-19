@@ -65,6 +65,12 @@
   color: #ef4444;
 }
 
+.form-message svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .form-message {
