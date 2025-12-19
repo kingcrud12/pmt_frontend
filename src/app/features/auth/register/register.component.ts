@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractContro
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../../core/services/auth.service";
 import { AuthPayloadRegister } from "../../../core/models/auth.model";
+import { FormMessageComponent } from "../../../shared/components/form/form-message/form-message";
 
 /**
  * RegisterComponent
@@ -33,7 +34,7 @@ import { AuthPayloadRegister } from "../../../core/models/auth.model";
     selector: "app-register",
     templateUrl: "register.component.html",
     styleUrl: "register.component.css",
-    imports: [CommonModule, ReactiveFormsModule, RouterLink]
+    imports: [CommonModule, ReactiveFormsModule, RouterLink, FormMessageComponent]
 })
 
 

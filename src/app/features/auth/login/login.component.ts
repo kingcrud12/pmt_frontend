@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../../core/services/auth.service";
 import { AuthPayloadLogin } from "../../../core/models/auth.model";
+import { FormMessageComponent } from "../../../shared/components/form/form-message/form-message";
 
 /**
  * LoginComponent handles user authentication and login functionality.
@@ -26,7 +27,7 @@ import { AuthPayloadLogin } from "../../../core/models/auth.model";
     selector: "app-login",
     templateUrl: "login.component.html",
     styleUrl: "login.component.css",
-    imports: [CommonModule, ReactiveFormsModule, RouterLink]
+    imports: [CommonModule, ReactiveFormsModule, RouterLink, FormMessageComponent]
 })
 
 

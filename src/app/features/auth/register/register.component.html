@@ -5,14 +5,18 @@
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
       <!-- Success Message -->
-      <div *ngIf="successMessage" class="alert alert--success">
-        {{ successMessage }}
-      </div>
+      <app-form-message
+        *ngIf="successMessage"
+        [message]="successMessage"
+        type="success"
+      ></app-form-message>
 
       <!-- Error Message -->
-      <div *ngIf="errorMessage" class="alert alert--error">
-        {{ errorMessage }}
-      </div>
+      <app-form-message
+        *ngIf="errorMessage"
+        [message]="errorMessage"
+        type="error"
+      ></app-form-message>
 
       <div class="inline-fields">
 
