@@ -1,0 +1,85 @@
+.form-message {
+  display: flex;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  border: 1px solid;
+  animation: slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  gap: 12px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.message-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.message-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+  margin-top: 1px;
+}
+
+.message-text {
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+}
+
+/* Success Variant */
+.form-message--success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.form-message--success .message-icon {
+  color: #10b981;
+}
+
+/* Error Variant */
+.form-message--error {
+  background-color: #fef2f2;
+  color: #7f1d1d;
+  border-color: #fecaca;
+}
+
+.form-message--error .message-icon {
+  color: #ef4444;
+}
+
+.form-message svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .form-message {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .message-icon {
+    width: 18px;
+    height: 18px;
+  }
+}

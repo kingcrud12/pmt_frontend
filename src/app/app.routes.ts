@@ -4,13 +4,25 @@ import { AllProjectsComponent } from './features/all-projects/all-projects.compo
 import { TaskDetailComponent } from './features/task-detail/task-detail.component';
 import { TaskCreateComponent } from './features/task-create/task-create.component';
 import { ProfileComponent } from './features/user/profile/profile.component';
+import { RegisterComponent } from './features/auth/register/register.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { LayoutComponent } from './shared/layout/layout.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'tasks', pathMatch: 'full' },
-    { path: 'dashboard', redirectTo: 'tasks', pathMatch: 'full' },
-    { path: 'tasks', component: MyTasksComponent },
-    { path: 'tasks/new', component: TaskCreateComponent },
-    { path: 'tasks/:id', component: TaskDetailComponent },
-    { path: 'projects', component: AllProjectsComponent },
-    { path: 'profile', component: ProfileComponent }
+    { path: 'auth/register', component: RegisterComponent },
+    { path: 'auth/login', component: LoginComponent },
+    {
+        path: '',
+        component: LayoutComponent,
+        children: [
+            { path: 'dashboard', redirectTo: 'tasks', pathMatch: 'full' },
+            { path: 'tasks', component: MyTasksComponent },
+            { path: 'tasks/new', component: TaskCreateComponent },
+            { path: 'tasks/:id', component: TaskDetailComponent },
+            { path: 'projects', component: AllProjectsComponent },
+            { path: 'profile', component: ProfileComponent }
+        ]
+    }
 ];
+
