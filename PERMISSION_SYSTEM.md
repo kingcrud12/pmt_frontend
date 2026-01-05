@@ -8,7 +8,10 @@ Le système de permissions utilise le **Role-Based Access Control (RBAC)** pour 
 
 1. **`permission.model.ts`** - Modèles et configuration des permissions
 2. **`permission.service.ts`** - Service de gestion des permissions
-3. **`can-access.directive.ts`** - Directive structurelle pour templates
+3. **`can-access.directive.ts`** - Directive structurelle `*appCanAccess`
+4. **`protected-action.component.ts`** - Composant wrapper simple
+5. **`protected-action-container.component.ts`** - Composant wrapper avancé
+6. **`protected-content.directive.ts`** - Directives pour templates
 
 ## Utilisation
 
@@ -84,7 +87,133 @@ export class ProjectListComponent {
 <button *appCanAccess="'task'; action: 'export'">Export Tasks</button>
 ```
 
-### 4. Récupérer les actions autorisées
+### 4. Composant `<app-protected-action>` - Simple wrapper
+
+Le composant wrapper simple affiche/cache le contenu selon les permissions:
+
+```html
+<!-- Afficher un bouton seulement si l'utilisateur peut supprimer -->
+<app-protected-action resource="task" action="delete">
+  <button (click)="deleteTask()">Delete Task</button>
+</app-protected-action>
+
+<!-- Avec message de secours par défaut -->
+<app-protected-action resource="project" action="create" [showDefaultFallback]="true">
+  <button>Create Project</button>
+</app-protected-action>
+
+<!-- Avec template personnalisé en fallback -->
+<app-protected-action resource="settings" action="delete" [fallbackTemplate]="noPermission">
+  <button>Delete Settings</button>
+</app-protected-action>
+
+<ng-template #noPermission>
+  <p style="color: red;">Seuls les administrateurs peuvent supprimer les paramètres</p>
+</ng-template>
+```
+
+**TypeScript:**
+
+```typescript
+import { Component } from "@angular/core";
+import { ProtectedActionComponent } from "@shared/components/protected-action/protected-action.component";
+
+@Component({
+  selector: "app-task-list",
+  imports: [ProtectedActionComponent],
+  template: `
+    <app-protected-action resource="task" action="delete" [showDefaultFallback]="true">
+      <button>Delete Selected</button>
+    </app-protected-action>
+  `,
+})
+export class TaskListComponent {}
+```
+
+### 5. Composant `<app-protected-action-container>` - Template avancé
+
+Pour plus de contrôle sur le contenu affiché/caché:
+
+```html
+<app-protected-action-container resource="task" action="delete">
+  <!-- Contenu si l'utilisateur a la permission -->
+  <ng-template appProtectedContent>
+    <button class="btn-danger" (click)="deleteTask()">
+      <svg><!-- delete icon --></svg>
+      Delete Task
+    </button>
+  </ng-template>
+
+  <!-- Contenu si l'utilisateur n'a PAS la permission -->
+  <ng-template appProtectedDenied>
+    <button class="btn-disabled" disabled>
+      <svg><!-- lock icon --></svg>
+      Delete (No Permission)
+    </button>
+  </ng-template>
+</app-protected-action-container>
+```
+
+**Exemple complet avec condition sur le rôle:**
+
+```html
+<app-protected-action-container resource="user" action="delete">
+  <ng-template appProtectedContent>
+    <div class="user-actions">
+      <button (click)="editUser()">Edit User</button>
+      <button class="danger" (click)="deleteUser()">Delete User</button>
+    </div>
+  </ng-template>
+
+  <ng-template appProtectedDenied>
+    <div class="permission-restricted">
+      <span class="badge">Admin Only</span>
+      <p>This action is restricted to administrators</p>
+    </div>
+  </ng-template>
+</app-protected-action-container>
+```
+
+### 6. Récupérer les actions autorisées
+
+```typescript
+export class TaskActionsComponent {
+  allowedActions: ActionType[];
+
+  constructor(private permissionService: PermissionService) {
+    // Get all actions this user can perform on tasks
+    this.allowedActions = this.permissionService.getAllowedActions("task");
+  }
+
+  canPerformAction(action: ActionType): boolean {
+    return this.allowedActions.includes(action);
+  }
+}
+```
+
+### 7. Vérifier l'accès à une ressource
+
+```typescript
+export class ResourceGuardComponent {
+  hasTaskAccess: boolean;
+  hasSettingsAccess: boolean;
+
+  constructor(private permissionService: PermissionService) {
+    this.hasTaskAccess = this.permissionService.canAccessResource("task");
+    this.hasSettingsAccess = this.permissionService.canAccessResource("settings");
+  }
+}
+```
+
+## Matrice de permissions par rôle
+
+### Admin
+
+- **task**: create, read, update, delete, export, share ✅
+- **project**: create, read, update, delete, export, share ✅
+- **user**: create, read, update, delete ✅
+- **team**: create, read, update, delete ✅
+- **settings**: create, read, update, delete ✅
 
 ```typescript
 export class TaskActionsComponent {

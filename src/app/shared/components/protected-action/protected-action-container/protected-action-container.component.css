@@ -1,0 +1,25 @@
+.protected-action-container {
+  display: contents;
+}
+
+.permission-denied-container {
+  display: flex;
+  justify-content: center;
+}
+
+.permission-denied {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: #fef2f2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.permission-denied svg {
+  color: #ef4444;
+  flex-shrink: 0;
+}
