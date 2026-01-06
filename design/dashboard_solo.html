@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>App Mobile V2 - Détails du projet - PMT</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "surface-dark": "#181e29",
+              "sidebar-dark": "#111318",
+              "border-dark": "#2f3646"
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill-1 {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #2f3646; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white h-screen overflow-hidden flex">
+<aside class="hidden w-72 flex-col border-r border-gray-200 bg-white dark:border-border-dark dark:bg-sidebar-dark lg:flex transition-colors duration-300">
+<div class="flex h-20 items-center px-6">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-blue-600 text-white font-black text-xl shadow-lg shadow-blue-900/20">
+                    P
+                </div>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold tracking-tight leading-none dark:text-white text-slate-900">PMT</h1>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Gestion de projet</span>
+</div>
+</div>
+</div>
+<nav class="flex flex-1 flex-col gap-1.5 overflow-y-auto px-4 py-4">
+<p class="px-3 mb-2 text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Menu Principal</p>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Tableau de bord</span>
+</a>
+<a class="group flex items-center gap-3 rounded-xl bg-primary/10 px-3 py-3 text-primary transition-all" href="#">
+<span class="material-symbols-outlined fill-1">folder</span>
+<span class="text-sm font-bold">Projets</span>
+</a>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<div class="relative">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">check_circle</span>
+<span class="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-sidebar-dark"></span>
+</div>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Tâches</span>
+</a>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">description</span>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Documents</span>
+</a>
+<p class="px-3 mt-6 mb-2 text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Outils</p>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Paramètres</span>
+</a>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">help</span>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Aide &amp; Support</span>
+</a>
+</nav>
+<div class="border-t border-gray-200 p-4 dark:border-border-dark">
+<div class="flex items-center gap-3 rounded-xl p-2 hover:bg-slate-100 dark:hover:bg-[#282e39] cursor-pointer transition-colors">
+<div class="relative h-10 w-10 overflow-hidden rounded-full border border-gray-200 dark:border-gray-700">
+<img alt="Avatar de l'utilisateur" class="h-full w-full object-cover" data-alt="Portrait of Alex Martin, project manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQEQnaGliHbug277EM_6hFcL4vrClQ4NJ6Ephuwy8CFGy8sisHwNwXTz6yamzSbWHvtJQS__AiSDQJgA5o686dBKIP9xqCAF2lBTabVOvMdwKTYtYg3Zg3WRQ96EG20NNVnIccIPPIugPa08xQZRaNXjFOkuBixf050a9Ztsmkwg9XTBY2pbl6LPfBlIE4IT6HKkUG2VDqmD2NM80PYOLaJT_x0LPG4DMMWtktVYgCcDIee5U0OdaxKQcUL_AIbLvJ8Us7FGMs9cal"/>
+<span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white dark:ring-sidebar-dark"></span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<p class="truncate text-sm font-bold dark:text-white">Alex Martin</p>
+<p class="truncate text-xs text-slate-500 dark:text-[#9da6b9]">alex.m@pmt.com</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-slate-400 text-lg">expand_more</span>
+</div>
+</div>
+</aside>
+<main class="flex flex-1 flex-col overflow-hidden relative">
+<header class="sticky top-0 z-20 flex flex-col gap-4 border-b border-gray-200 bg-white/80 px-6 py-4 backdrop-blur-md dark:border-border-dark dark:bg-background-dark/80 lg:h-24 lg:flex-row lg:items-center lg:justify-between lg:py-0">
+<div class="flex items-center gap-4">
+<button class="lg:hidden rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:text-white dark:hover:bg-surface-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-4">
+<button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-slate-500 hover:bg-slate-50 hover:text-primary dark:border-border-dark dark:bg-surface-dark dark:text-slate-400 dark:hover:bg-[#282e39] transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<h2 class="text-2xl font-black tracking-tight dark:text-white">App Mobile V2</h2>
+<span class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">En cours</span>
+</div>
+<p class="text-sm font-medium text-slate-500 dark:text-[#9da6b9] hidden sm:block">Client: TechFlow Inc.</p>
+</div>
+</div>
+</div>
+<div class="flex flex-1 flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 sm:gap-6">
+<div class="flex -space-x-2 mr-2">
+<img alt="Portrait of team member Sarah" class="h-9 w-9 rounded-full border-2 border-white object-cover dark:border-background-dark" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmNvlu4--6RqIfQhqPcPlqzj7SdmB0tHRcu_1jxDpBNZOJfRggtd1H3GuCZ39xSiGZ-zlYcE3Hp7IlycYvc5LEoako4mG7stHU3aWZ-mudSy2aXMWXxSc2uwH29dGTq9TQINGY7dDraqV5PeEEIB9qa9F_AeyuC-HXxtkgp5dGmIJp9cYZ54ceTUdEYqc6OcpgLgCh6OXXvp4jA7D3xZYpcQSC2-aO_RAhwCowsXjKVK6GoYGu1czsSjdMwkqbG1XrLAhDu2LqsbcH"/>
+<img alt="Portrait of team member Mike" class="h-9 w-9 rounded-full border-2 border-white object-cover dark:border-background-dark" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1qAywJu-fVW2e7ZzDu4_q25jsi9VeNTH6cpViq0yoHnWDFuJJ1Ujkf0RB1ju51FvyiyeFPaqGRQnbd--5b4j3Ir91HMi3nxOD_btdTAk-2WOaV3CVR4QH1QXmjEEDUaqT5AHB8kqW3fQszUzjXh30Buann28-p0BanS21aed5cDq2j9xRQx4rqrMCM_pfbOddo9JTTHgy-tme5fzkpkBWzjB65vhrHg6YdxY9GnjJvcMmEg2Wzrn_igryn752EbMhcdpLhCC2PzJI"/>
+<img alt="Portrait of team member David" class="h-9 w-9 rounded-full border-2 border-white object-cover dark:border-background-dark" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMY3JOVb4_7V74mHUZd0wPYc92f4a-ORq9NFi2vS7gjL6QeAPYF-sdA2mDCQEW3b6OcrchiG0fnD43l6hobliCjuoLHG97h8Hw6fjYGPl8giiVN38O_8IZOtLKcwcsMsrNHWvWxfzaH45V5pH9PxCIcnUNlScW82_wlj4RRce5xbUTXfgXYxHECNBT5PzEHQ2U3-dvlr9_hxT-1uTWIDUXhdj0OlrlnV71VIbzL2YobCD2zI6I0wT-J2DjH9-glmjrkx_PQVaG5NLQ"/>
+<button class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-dashed border-gray-300 bg-white text-xs font-bold text-slate-400 hover:border-primary hover:text-primary dark:border-gray-600 dark:bg-transparent dark:hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-gray-200 dark:bg-border-dark hidden sm:block"></div>
+<div class="flex items-center gap-3">
+<button class="relative rounded-xl p-2.5 text-slate-500 hover:bg-slate-100 transition-colors dark:text-slate-400 dark:hover:bg-surface-dark">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-transform hover:scale-[1.02] active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">add_task</span>
+<span class="whitespace-nowrap">Nouvelle Tâche</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 lg:p-10">
+<div class="mx-auto max-w-7xl flex flex-col gap-8">
+<div class="rounded-3xl bg-gradient-to-br from-indigo-600 to-primary p-1 shadow-lg dark:from-indigo-900 dark:to-primary/50">
+<div class="flex flex-col md:flex-row items-center gap-8 rounded-[1.4rem] bg-white p-6 dark:bg-[#131820] md:p-8 h-full">
+<div class="relative flex h-40 w-40 flex-shrink-0 items-center justify-center">
+<svg class="h-full w-full -rotate-90 transform" viewBox="0 0 100 100">
+<circle class="text-gray-100 dark:text-gray-800" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-3xl font-black text-slate-900 dark:text-white">75%</span>
+<span class="text-xs font-bold uppercase text-slate-400">Global</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-6 w-full">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="flex flex-col gap-1 p-3 rounded-xl bg-slate-50 dark:bg-surface-dark">
+<span class="text-xs font-semibold text-slate-500 uppercase">Tâches Totales</span>
+<span class="text-xl font-bold text-slate-900 dark:text-white">48</span>
+</div>
+<div class="flex flex-col gap-1 p-3 rounded-xl bg-green-50 dark:bg-green-900/10">
+<span class="text-xs font-semibold text-green-600 uppercase">Terminées</span>
+<span class="text-xl font-bold text-green-700 dark:text-green-400">36</span>
+</div>
+<div class="flex flex-col gap-1 p-3 rounded-xl bg-blue-50 dark:bg-blue-900/10">
+<span class="text-xs font-semibold text-blue-600 uppercase">En cours</span>
+<span class="text-xl font-bold text-blue-700 dark:text-blue-400">8</span>
+</div>
+<div class="flex flex-col gap-1 p-3 rounded-xl bg-orange-50 dark:bg-orange-900/10">
+<span class="text-xs font-semibold text-orange-600 uppercase">En Retard</span>
+<span class="text-xl font-bold text-orange-700 dark:text-orange-400">4</span>
+</div>
+</div>
+<div class="w-full">
+<div class="flex justify-between mb-2">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Phase actuelle: Développement Frontend</span>
+<span class="text-xs font-bold text-slate-400">Échéance: 24 Oct</span>
+</div>
+<div class="h-3 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+<div class="h-full w-3/4 rounded-full bg-gradient-to-r from-blue-400 to-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-8 xl:grid-cols-3">
+<div class="flex flex-col gap-6 xl:col-span-2">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Tâches actives</h3>
+<div class="flex bg-gray-100 p-1 rounded-lg dark:bg-surface-dark">
+<button class="px-3 py-1 bg-white text-xs font-bold rounded shadow-sm text-slate-800 dark:bg-[#282e39] dark:text-white transition-all">Liste</button>
+<button class="px-3 py-1 text-xs font-bold rounded text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition-all">Kanban</button>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<div class="group flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-primary/40 hover:shadow-md dark:border-border-dark dark:bg-surface-dark dark:hover:border-primary/40">
+<div class="flex items-start gap-4">
+<div class="mt-1">
+<input class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800" type="checkbox"/>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Intégration API Authentification</h4>
+<div class="flex items-center gap-2">
+<span class="rounded bg-orange-100 px-2 py-0.5 text-[10px] font-bold uppercase text-orange-700 dark:bg-orange-500/10 dark:text-orange-400">Haute</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">• Backend Team</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img alt="Portrait of team member" class="h-7 w-7 rounded-full border-2 border-white object-cover dark:border-surface-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1qAywJu-fVW2e7ZzDu4_q25jsi9VeNTH6cpViq0yoHnWDFuJJ1Ujkf0RB1ju51FvyiyeFPaqGRQnbd--5b4j3Ir91HMi3nxOD_btdTAk-2WOaV3CVR4QH1QXmjEEDUaqT5AHB8kqW3fQszUzjXh30Buann28-p0BanS21aed5cDq2j9xRQx4rqrMCM_pfbOddo9JTTHgy-tme5fzkpkBWzjB65vhrHg6YdxY9GnjJvcMmEg2Wzrn_igryn752EbMhcdpLhCC2PzJI"/>
+</div>
+<div class="hidden sm:flex items-center gap-1 rounded-md bg-orange-50 px-2 py-1 text-xs font-medium text-orange-600 dark:bg-orange-900/20 dark:text-orange-400">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span>Aujourd'hui</span>
+</div>
+</div>
+</div>
+<div class="group flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-primary/40 hover:shadow-md dark:border-border-dark dark:bg-surface-dark dark:hover:border-primary/40">
+<div class="flex items-start gap-4">
+<div class="mt-1">
+<input class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800" type="checkbox"/>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Design des écrans Paramètres</h4>
+<div class="flex items-center gap-2">
+<span class="rounded bg-blue-100 px-2 py-0.5 text-[10px] font-bold uppercase text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">Moyenne</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">• UI/UX</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img alt="Portrait of team member" class="h-7 w-7 rounded-full border-2 border-white object-cover dark:border-surface-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmNvlu4--6RqIfQhqPcPlqzj7SdmB0tHRcu_1jxDpBNZOJfRggtd1H3GuCZ39xSiGZ-zlYcE3Hp7IlycYvc5LEoako4mG7stHU3aWZ-mudSy2aXMWXxSc2uwH29dGTq9TQINGY7dDraqV5PeEEIB9qa9F_AeyuC-HXxtkgp5dGmIJp9cYZ54ceTUdEYqc6OcpgLgCh6OXXvp4jA7D3xZYpcQSC2-aO_RAhwCowsXjKVK6GoYGu1czsSjdMwkqbG1XrLAhDu2LqsbcH"/>
+</div>
+<div class="hidden sm:flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Demain</span>
+</div>
+</div>
+</div>
+<div class="group flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-primary/40 hover:shadow-md dark:border-border-dark dark:bg-surface-dark dark:hover:border-primary/40">
+<div class="flex items-start gap-4">
+<div class="mt-1">
+<input class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800" type="checkbox"/>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Rédaction Documentation Technique</h4>
+<div class="flex items-center gap-2">
+<span class="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-bold uppercase text-slate-600 dark:bg-slate-700 dark:text-slate-300">Basse</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">• Dev Team</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img alt="Portrait of team member" class="h-7 w-7 rounded-full border-2 border-white object-cover dark:border-surface-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMY3JOVb4_7V74mHUZd0wPYc92f4a-ORq9NFi2vS7gjL6QeAPYF-sdA2mDCQEW3b6OcrchiG0fnD43l6hobliCjuoLHG97h8Hw6fjYGPl8giiVN38O_8IZOtLKcwcsMsrNHWvWxfzaH45V5pH9PxCIcnUNlScW82_wlj4RRce5xbUTXfgXYxHECNBT5PzEHQ2U3-dvlr9_hxT-1uTWIDUXhdj0OlrlnV71VIbzL2YobCD2zI6I0wT-J2DjH9-glmjrkx_PQVaG5NLQ"/>
+</div>
+<div class="hidden sm:flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Ven 27</span>
+</div>
+</div>
+</div>
+<button class="w-full py-3 text-sm font-bold text-slate-500 hover:text-primary hover:bg-slate-50 rounded-xl border border-dashed border-gray-300 dark:border-gray-700 dark:hover:bg-surface-dark transition-all">
+                                + Ajouter une tâche rapide
+                            </button>
+</div>
+</div>
+<div class="flex flex-col gap-6 xl:col-span-1">
+<div class="flex flex-col rounded-2xl border border-gray-200 bg-white dark:border-border-dark dark:bg-surface-dark">
+<div class="flex items-center justify-between border-b border-gray-100 p-5 dark:border-border-dark">
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-slate-900 dark:text-white">Documents (8)</h3>
+</div>
+<button class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-primary dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">upload_file</span>
+</button>
+</div>
+<div class="flex flex-col p-2">
+<div class="group flex items-center justify-between rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-[#282e39] transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-500 dark:bg-red-500/20">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="truncate text-sm font-medium text-slate-700 dark:text-white group-hover:text-primary transition-colors">Specs_Techniques_v2.pdf</span>
+<span class="text-xs text-slate-400">4.2 MB • Sarah J.</span>
+</div>
+</div>
+</div>
+<div class="group flex items-center justify-between rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-[#282e39] transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-500 dark:bg-blue-500/20">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div class="flex flex-col">
+<span class="truncate text-sm font-medium text-slate-700 dark:text-white group-hover:text-primary transition-colors">Mockups_Home.png</span>
+<span class="text-xs text-slate-400">2.5 MB • Alex M.</span>
+</div>
+</div>
+</div>
+<a class="mt-1 block text-center text-xs font-bold text-primary hover:underline py-2" href="#">Voir tous les documents</a>
+</div>
+</div>
+<div class="flex flex-col rounded-2xl border border-gray-200 bg-white dark:border-border-dark dark:bg-surface-dark">
+<div class="flex items-center justify-between border-b border-gray-100 p-5 dark:border-border-dark">
+<h3 class="font-bold text-slate-900 dark:text-white">Activité récente</h3>
+</div>
+<div class="p-5">
+<ol class="relative border-l border-gray-200 dark:border-gray-700 ml-2">
+<li class="mb-6 ml-6">
+<span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-4 ring-white dark:ring-surface-dark dark:bg-blue-900">
+<img alt="Sarah image" class="rounded-full shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmNvlu4--6RqIfQhqPcPlqzj7SdmB0tHRcu_1jxDpBNZOJfRggtd1H3GuCZ39xSiGZ-zlYcE3Hp7IlycYvc5LEoako4mG7stHU3aWZ-mudSy2aXMWXxSc2uwH29dGTq9TQINGY7dDraqV5PeEEIB9qa9F_AeyuC-HXxtkgp5dGmIJp9cYZ54ceTUdEYqc6OcpgLgCh6OXXvp4jA7D3xZYpcQSC2-aO_RAhwCowsXjKVK6GoYGu1czsSjdMwkqbG1XrLAhDu2LqsbcH"/>
+</span>
+<div class="items-center justify-between mb-1 sm:flex">
+<time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">Il y a 2h</time>
+<div class="text-sm font-normal text-gray-500 dark:text-gray-300"><span class="font-bold text-gray-900 dark:text-white">Sarah</span> a commenté sur <span class="font-medium text-primary">Task #42</span></div>
+</div>
+<div class="p-3 text-xs italic font-normal text-gray-500 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">"J'ai besoin de plus de détails sur l'endpoint user."</div>
+</li>
+<li class="mb-6 ml-6">
+<span class="absolute flex items-center justify-center w-6 h-6 bg-green-100 rounded-full -left-3 ring-4 ring-white dark:ring-surface-dark dark:bg-green-900">
+<span class="material-symbols-outlined text-green-600 dark:text-green-300 text-xs">check</span>
+</span>
+<div class="items-center justify-between mb-1 sm:flex">
+<time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">Il y a 4h</time>
+<div class="text-sm font-normal text-gray-500 dark:text-gray-300"><span class="font-bold text-gray-900 dark:text-white">Mike</span> a terminé la tâche <span class="font-medium text-primary">Setup DB</span></div>
+</div>
+</li>
+<li class="ml-6">
+<span class="absolute flex items-center justify-center w-6 h-6 bg-purple-100 rounded-full -left-3 ring-4 ring-white dark:ring-surface-dark dark:bg-purple-900">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-300 text-xs">upload</span>
+</span>
+<div class="items-center justify-between mb-1 sm:flex">
+<time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">Hier</time>
+<div class="text-sm font-normal text-gray-500 dark:text-gray-300">Nouveau fichier ajouté: <span class="font-medium text-slate-700 dark:text-white">Assets.zip</span></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>
