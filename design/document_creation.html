@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PMT - Création de document</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1c1f27",
+                        "border-dark": "#3b4354",
+                        "text-secondary": "#9da6b9",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for cleaner look in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b4354; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111318] dark:text-white min-h-screen flex flex-col">
+<!-- Navbar / Header -->
+<header class="w-full border-b border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark sticky top-0 z-50">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold leading-tight tracking-tight">Nouveau document</h1>
+<span class="text-xs text-text-secondary font-medium">Brouillon - Dernière modif. il y a 2 min</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors">
+                    Annuler
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/20">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Enregistrer</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-[1280px] mx-auto p-4 sm:px-6 lg:px-8 py-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
+<!-- Left Column: Editor (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Title Input -->
+<div class="w-full">
+<input class="w-full bg-transparent border-0 border-b border-transparent focus:border-gray-200 dark:focus:border-border-dark focus:ring-0 text-3xl sm:text-4xl font-extrabold placeholder-gray-400 dark:placeholder-gray-600 px-0 py-2 transition-all" placeholder="Titre du document..." type="text"/>
+</div>
+<!-- Rich Text Editor Container -->
+<div class="flex flex-col flex-1 min-h-[500px] bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-border-dark shadow-sm overflow-hidden group focus-within:ring-1 focus-within:ring-primary/50 transition-all">
+<!-- Toolbar -->
+<div class="flex items-center gap-1 p-2 border-b border-gray-100 dark:border-border-dark bg-gray-50 dark:bg-[#15171e]">
+<button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors" title="Gras">
+<span class="material-symbols-outlined text-[20px]">format_bold</span>
+</button>
+<button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors" title="Italique">
+<span class="material-symbols-outlined text-[20px]">format_italic</span>
+</button>
+<button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors" title="Souligné">
+<span class="material-symbols-outlined text-[20px]">format_underlined</span>
+</button>
+<div class="w-px h-5 bg-gray-300 dark:bg-border-dark mx-1"></div>
+<button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors" title="Liste à puces">
+<span class="material-symbols-outlined text-[20px]">format_list_bulleted</span>
+</button>
+<button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors" title="Liste numérotée">
+<span class="material-symbols-outlined text-[20px]">format_list_numbered</span>
+</button>
+<div class="w-px h-5 bg-gray-300 dark:bg-border-dark mx-1"></div>
+<button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors" title="Lien">
+<span class="material-symbols-outlined text-[20px]">link</span>
+</button>
+<button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors" title="Image">
+<span class="material-symbols-outlined text-[20px]">image</span>
+</button>
+<div class="flex-1"></div>
+<span class="text-xs text-text-secondary px-2">Markdown supporté</span>
+</div>
+<!-- Text Area -->
+<textarea class="flex-1 w-full p-6 bg-transparent border-none focus:ring-0 resize-none text-base leading-relaxed text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600 font-body" placeholder="Commencez à rédiger votre contenu ici..."></textarea>
+</div>
+<!-- File Attachment Dropzone -->
+<div class="w-full border-2 border-dashed border-gray-300 dark:border-border-dark rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary hover:bg-primary/5 transition-all group">
+<div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-surface-dark flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-sm">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 group-hover:text-primary">upload_file</span>
+</div>
+<p class="text-sm font-medium text-gray-700 dark:text-gray-300">Cliquez pour ajouter des fichiers ou glissez-déposez</p>
+<p class="text-xs text-text-secondary mt-1">PDF, DOCX, PNG, JPG jusqu'à 10Mo</p>
+</div>
+</div>
+<!-- Right Column: Metadata (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Project Selector -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">folder_open</span>
+                        Projet associé
+                    </label>
+<div class="relative">
+<select class="w-full appearance-none rounded-lg border border-gray-300 dark:border-border-dark bg-white dark:bg-surface-dark text-gray-900 dark:text-white p-3 pr-10 focus:border-primary focus:ring-1 focus:ring-primary transition-shadow cursor-pointer">
+<option disabled="" selected="" value="">Sélectionner un projet...</option>
+<option value="marketing">Campagne Marketing Q3</option>
+<option value="dev">Développement Web App</option>
+<option value="design">Refonte UI/UX</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<div class="h-px bg-gray-200 dark:bg-border-dark w-full"></div>
+<!-- Task Linking -->
+<div class="flex flex-col gap-3">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">task_alt</span>
+                        Lier à des tâches
+                    </label>
+<!-- Search Task Input -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">search</span>
+</div>
+<input class="w-full rounded-lg border border-gray-300 dark:border-border-dark bg-white dark:bg-surface-dark text-gray-900 dark:text-white pl-10 p-2.5 text-sm focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Rechercher une tâche..." type="text"/>
+</div>
+<!-- Linked Tasks Chips -->
+<div class="flex flex-col gap-2 mt-1">
+<!-- Task Chip 1 -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors group cursor-default">
+<div class="flex items-center gap-3 overflow-hidden">
+<div class="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"></div>
+<span class="text-sm text-gray-700 dark:text-gray-300 truncate">Maquettes Homepage v2</span>
+</div>
+<button class="text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 p-1">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Task Chip 2 -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark hover:border-primary/50 transition-colors group cursor-default">
+<div class="flex items-center gap-3 overflow-hidden">
+<div class="w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></div>
+<span class="text-sm text-gray-700 dark:text-gray-300 truncate">Rédaction Specs Techniques</span>
+</div>
+<button class="text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 p-1">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-px bg-gray-200 dark:bg-border-dark w-full"></div>
+<!-- Tags -->
+<div class="flex flex-col gap-3">
+<label class="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">label</span>
+                        Étiquettes
+                    </label>
+<div class="relative">
+<input class="w-full rounded-lg border border-gray-300 dark:border-border-dark bg-white dark:bg-surface-dark text-gray-900 dark:text-white p-2.5 text-sm focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Ajouter un tag..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                            #urgent
+                            <button class="hover:text-primary-dark ml-1"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-border-dark text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
+                            #documentation
+                            <button class="hover:text-gray-900 dark:hover:text-white ml-1"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-border-dark text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
+                            #client-alpha
+                            <button class="hover:text-gray-900 dark:hover:text-white ml-1"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+</div>
+<!-- Abstract Visual Filler to balance layout height (optional but nice) -->
+<div class="mt-auto rounded-xl overflow-hidden relative h-32 hidden lg:block">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-500/20" data-alt="Abstract gradient decorative background"></div>
+<div class="relative z-10 p-4 h-full flex flex-col justify-end">
+<p class="text-xs text-text-secondary">Astuce: Utilisez <span class="font-mono bg-black/10 dark:bg-white/10 px-1 rounded">Ctrl+S</span> pour sauvegarder rapidement.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
