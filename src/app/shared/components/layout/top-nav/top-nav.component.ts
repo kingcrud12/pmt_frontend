@@ -1,20 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
+import { CurrentUser } from '../../../../core/models/auth.model';
 
 @Component({
   selector: 'app-top-nav',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './top-nav.component.html',
-  styleUrl: './top-nav.component.css'
+  styleUrl: './top-nav.component.css',
 })
-export class TopNavComponent {
-  userName: string = 'Alice Dupont';
-  userInitials: string = 'AD';
+export class TopNavComponent implements OnInit {
+  userName: string = '';
+  userInitials: string = '';
   showUserMenu = false;
+  currentUser: CurrentUser | null = null;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    // Subscribe to current user from auth service
+    this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user;
+      if (user) {
+        this.userName = `${user.firstName} ${user.lastName}`;
+        this.userInitials = `${user.firstName.charAt(
+          0
+        )}${user.lastName.charAt(0)}`.toUpperCase();
+      }
+    });
+  }
 
   toggleUserMenu(): void {
     this.showUserMenu = !this.showUserMenu;
@@ -27,9 +43,7 @@ export class TopNavComponent {
 
   logout(): void {
     this.showUserMenu = false;
-    console.log('User logged out');
-    // Implement actual logout logic here
-    this.router.navigate(['/tasks']); // temporary redirect
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
   }
 }
-
