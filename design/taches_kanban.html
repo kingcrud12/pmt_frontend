@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PMT - Vue détaillée du projet (Kanban)</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#111318",
+              "surface-dark": "#1c212c",
+              "surface-highlight": "#282e39",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #282e39; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b4354; 
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .kanban-card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display overflow-hidden h-screen flex antialiased selection:bg-primary/30 selection:text-white">
+<aside class="w-72 flex-none border-r border-[#282e39] flex flex-col justify-between bg-background-dark h-full hidden md:flex">
+<div class="flex flex-col gap-4 p-4">
+<div class="flex gap-3 items-center mb-6">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-lg ring-2 ring-[#282e39]" data-alt="User profile avatar gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBpKOSRVoFeRttgxwqqNIxEobxvBpn-w9yAIkKyoAhxbw4FlvbxpRh58bHCVRfXhlJbg1flU_amknjlGueshL0_WP_KM8xGlHOq8n4ox9eu7muokRpSsIak1ErkOdIpGkiyCkvydooTm1ob55w9Q5K4fi0C6t7CUCbQEV0KVvIEu4tl9SDOSvEEkDCWhoqvQ3TrT-Kq5Wwicyx0MVmb3wf4zUCMCJwhsneylsbUlJ4UR6FSU2w7SqoMWCDmLsx_4RymOF1ha03DX_87");'>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold leading-tight">PMT</h1>
+<p class="text-[#9da6b9] text-xs font-medium uppercase tracking-wide">Workspace</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9da6b9] hover:bg-[#282e39] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#9da6b9] group-hover:text-white" style="font-size: 24px;">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-white shadow-sm ring-1 ring-primary/20" href="#">
+<span class="material-symbols-outlined text-primary fill-1" style="font-size: 24px;">folder</span>
+<span class="text-sm font-bold">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9da6b9] hover:bg-[#282e39] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#9da6b9] group-hover:text-white" style="font-size: 24px;">check_circle</span>
+<span class="text-sm font-medium">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9da6b9] hover:bg-[#282e39] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#9da6b9] group-hover:text-white" style="font-size: 24px;">description</span>
+<span class="text-sm font-medium">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9da6b9] hover:bg-[#282e39] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#9da6b9] group-hover:text-white" style="font-size: 24px;">group</span>
+<span class="text-sm font-medium">Team</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-[#282e39]">
+<p class="text-[#9da6b9] text-xs font-bold uppercase tracking-wider mb-3">Équipe du projet</p>
+<div class="flex -space-x-2 overflow-hidden mb-4">
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-[#111318]" data-alt="Portrait of a female team member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwIrGmWJqKrqmcd9AGIMfg-cmJ22weBoepyrszvzu7fyAWbk4np-nh2L98WdqJ-1xyUi-yw330CguAgUDMuuOCnSG5pZ_VWf-_PY7Y-I9mfmV7ALUtkWF2zor0-kZM2VUeokXG0jRXXECci2pKAtreGsgLAzm4X2ISzCwrbbjLLWW6xZICC9aHU0zPk4Csf5rVo2MQFTzp7tiO04HNd0vZYOA_lhmb-ZhWff7pnuOsKeaZVTdIGeeQ2gCW5auFx5hQ_wzfImjkx3Sw"/>
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-[#111318]" data-alt="Portrait of a male team member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaLA1ACkNHqbAko1z_Y96Exl5jK0T2C-tcXeWjMYeLXdpScrtu6bsJD7AUzFUEdoxAan1Bt0Vgvts7K66LT3TDdbY92vKTdUln99S6YsjmMiugIMS895XnlO3UFItHVGxQnc8HQiUpxkN4Ihn_ow5XvitZv0lLOTZBhu2tVdj5qwuOjjte_G0s_ekPY-s5vE4qlFYCUZnS_xXucosdkrNzfIum0F7_iGrbM2-KsAwrgmCllW32Wrrqgt9uAfLaTtkuWv4WrRDdk8fM"/>
+<img alt="Team member" class="inline-block h-8 w-8 rounded-full ring-2 ring-[#111318]" data-alt="Portrait of a male team member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3Ko5lcnw0hdydMEbN2nR8_URn6zghoynxkXZYIyQtT86avXt1uvTkFQvk1kVC1D74bQ-Zq1KAe35I6GpYLY-7ee6eyhrpDSEYPFiPtZBnUeonWE1GKqxHuEMVcAGbdMa3SWxvbLC6Uxiqo8gqW3QYVneGjTSY4t2p5LXcJrEAta5JbBS-hFoVAsMLcQ7pbQxvsSOaeSna2p6MU7hhdocYhPYUesq3SRi5hqR9KsWjRt-nf2pcLH5f1-YLx_opf9yt6HJhUMD55-Yu"/>
+<div class="flex items-center justify-center h-8 w-8 rounded-full ring-2 ring-[#111318] bg-[#282e39] text-xs font-medium text-white">+2</div>
+</div>
+<div class="bg-[#282e39] rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" style="font-size: 20px;">info</span>
+<div class="flex flex-col">
+<p class="text-white text-xs font-bold">Prochaine étape</p>
+<p class="text-[#9da6b9] text-xs">Validation client le 15 Oct.</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden relative bg-background-dark">
+<header class="flex-none p-6 md:px-10 md:pt-8 md:pb-4 bg-background-dark/95 backdrop-blur z-10 sticky top-0">
+<div class="max-w-[1920px] mx-auto w-full flex flex-col gap-6">
+<div class="flex flex-wrap items-start justify-between gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 text-[#9da6b9] text-sm font-medium mb-1">
+<span>Projects</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-white">Refonte Site Web</span>
+</div>
+<h1 class="text-white text-3xl md:text-4xl font-extrabold tracking-tight">Refonte Site Web</h1>
+<p class="text-[#9da6b9] text-base font-normal mt-1">Client: TechCorp <span class="mx-2">•</span> Échéance: 15 Déc</p>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary hover:bg-blue-600 active:scale-95 transition-all text-white text-sm font-bold shadow-lg shadow-blue-900/20 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
+<span>Ajouter une tâche</span>
+</button>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex gap-6 justify-between items-end">
+<p class="text-white text-sm font-bold">Progression globale</p>
+<p class="text-primary text-sm font-bold">75%</p>
+</div>
+<div class="w-full rounded-full h-2 bg-[#282e39] overflow-hidden">
+<div class="h-full rounded-full bg-gradient-to-r from-blue-600 to-primary transition-all duration-1000 ease-out" style="width: 75%;"></div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
+<div class="relative w-full md:max-w-xs group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#9da6b9] group-focus-within:text-primary transition-colors" style="font-size: 20px;">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-[#282e39] text-white placeholder-[#9da6b9] focus:outline-none focus:ring-2 focus:ring-primary transition-all sm:text-sm" placeholder="Rechercher une tâche..." type="text"/>
+</div>
+<div class="flex items-center gap-3 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+<div class="flex items-center bg-[#282e39] rounded-lg p-1">
+<button class="px-3 py-1.5 rounded-md text-[#9da6b9] hover:text-white text-xs font-medium transition-colors">Liste</button>
+<button class="px-3 py-1.5 rounded-md bg-[#3b4354] text-white text-xs font-bold shadow-sm">Kanban</button>
+<button class="px-3 py-1.5 rounded-md text-[#9da6b9] hover:text-white text-xs font-medium transition-colors">Gantt</button>
+</div>
+<div class="h-6 w-px bg-[#3b4354] mx-1"></div>
+<button class="p-2 text-[#9da6b9] hover:text-white hover:bg-[#282e39] rounded-lg transition-colors" title="Filter">
+<span class="material-symbols-outlined" style="font-size: 22px;">filter_list</span>
+</button>
+<button class="p-2 text-[#9da6b9] hover:text-white hover:bg-[#282e39] rounded-lg transition-colors" title="Sort">
+<span class="material-symbols-outlined" style="font-size: 22px;">sort</span>
+</button>
+</div>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/20 text-primary border border-primary/30 text-xs font-bold hover:bg-primary/30 transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">apps</span>
+                        Tout
+                    </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#282e39] text-[#9da6b9] border border-transparent hover:border-[#3b4354] text-xs font-medium transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+                        En cours
+                    </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#282e39] text-[#9da6b9] border border-transparent hover:border-[#3b4354] text-xs font-medium transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px] text-orange-400">warning</span>
+                        Priorité haute
+                    </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#282e39] text-[#9da6b9] border border-transparent hover:border-[#3b4354] text-xs font-medium transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                        Terminé
+                    </button>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-x-auto overflow-y-hidden px-6 md:px-10 pb-6">
+<div class="flex h-full gap-6 mx-auto w-max min-w-full">
+<div class="flex flex-col h-full w-[350px] flex-shrink-0 bg-[#161a22] rounded-xl border border-[#282e39]">
+<div class="p-4 flex items-center justify-between border-b border-[#282e39] bg-[#1c212c] rounded-t-xl sticky top-0 z-10">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-white/30"></div>
+<h2 class="text-white text-sm font-bold uppercase tracking-wider">À faire</h2>
+<span class="ml-1 px-2 py-0.5 rounded-full bg-[#282e39] text-[#9da6b9] text-xs font-bold">3</span>
+</div>
+<button class="text-[#9da6b9] hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-3 flex flex-col gap-3">
+<div class="kanban-card group p-4 bg-[#1c212c] hover:bg-[#222836] border border-[#282e39] hover:border-primary/50 rounded-lg transition-all duration-200 cursor-grab active:cursor-grabbing shadow-sm relative">
+<div class="flex items-start justify-between mb-2">
+<span class="text-[#ef4444] text-[10px] font-bold uppercase tracking-wide border border-[#ef4444]/20 bg-[#ef4444]/10 px-2 py-0.5 rounded">Haute</span>
+<button class="opacity-0 group-hover:opacity-100 text-[#9da6b9] hover:text-white transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white font-medium text-sm leading-snug mb-3">Finaliser les wireframes de la page d'accueil</h3>
+<div class="flex items-center justify-between pt-2 border-t border-[#282e39]">
+<div class="flex items-center gap-1.5 text-[#9da6b9]">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span class="text-xs">Demain</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full ring-2 ring-[#1c212c]" data-alt="Portrait of task assignee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtyps4xaQv3_MYI_SsCE-G1pmkFhQGRy3-BKsuUPe1_6qaFgdGnuTXoHHuEBmLcQWgutB43v8nPG-vkS54ZbN3GtVSmaPP_uIkeLfGgdMs_NjRwcozM2aU1tnuDbKoXaPRcTzDWzh3g70K2x5lF9TGWhT0HluwQk13IqysQ8jACLJXnhlJgnQ7fv_5FMkFTkKkioLFHs0EssqL2t6DWlwCXZEoUg7jtuHjMRwjm7i0NSyVj_9qM0cx9G0d2UuSwH8jeZ0vzcKohENA"/>
+</div>
+</div>
+<div class="kanban-card group p-4 bg-[#1c212c] hover:bg-[#222836] border border-[#282e39] hover:border-primary/50 rounded-lg transition-all duration-200 cursor-grab active:cursor-grabbing shadow-sm relative">
+<div class="flex items-start justify-between mb-2">
+<span class="text-orange-400 text-[10px] font-bold uppercase tracking-wide border border-orange-400/20 bg-orange-400/10 px-2 py-0.5 rounded">Moyenne</span>
+<button class="opacity-0 group-hover:opacity-100 text-[#9da6b9] hover:text-white transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white font-medium text-sm leading-snug mb-3">Sélection palette couleurs</h3>
+<div class="flex items-center justify-between pt-2 border-t border-[#282e39]">
+<div class="flex items-center gap-1.5 text-[#9da6b9]">
+<span class="material-symbols-outlined text-[14px]">event</span>
+<span class="text-xs">Vendredi</span>
+</div>
+<div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-[10px] font-bold text-white ring-2 ring-[#1c212c]">JS</div>
+</div>
+</div>
+<div class="kanban-card group p-4 bg-[#1c212c] hover:bg-[#222836] border border-[#282e39] hover:border-primary/50 rounded-lg transition-all duration-200 cursor-grab active:cursor-grabbing shadow-sm relative">
+<div class="flex items-start justify-between mb-2">
+<span class="text-blue-400 text-[10px] font-bold uppercase tracking-wide border border-blue-400/20 bg-blue-400/10 px-2 py-0.5 rounded">Basse</span>
+<button class="opacity-0 group-hover:opacity-100 text-[#9da6b9] hover:text-white transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white font-medium text-sm leading-snug mb-3">Valider le cahier des charges avec l'équipe marketing</h3>
+<div class="flex items-center justify-between pt-2 border-t border-[#282e39]">
+<div class="flex items-center gap-1.5 text-[#9da6b9]">
+<span class="material-symbols-outlined text-[14px]">event</span>
+<span class="text-xs">12 Oct</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full ring-2 ring-[#1c212c]" data-alt="Portrait of task assignee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBySXGUtypFJWUCXh9gPt1pwvih80gc7BbHtvgsljOswxcx6HnVu4CD20LE-mII15qqQ_PQX1WWXx8kZiazf9XSgTmelkzoTJyD_kSIxquzpp8QpzJA0YuKUuU-kj9DhqULP-yUpFWgSxbW9pEQ_qdZ7ha-rIRkQldsaNUWSlJQEJdy4qAr-JYOcMt1SY2TNRxGHYeHrTtB9AknvkpCwekYOU-ClvxJL0-qEA9ttm1SORw3jFuAevxM1OTzwoXXei97k0UChTEHSqAr"/>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col h-full w-[350px] flex-shrink-0 bg-[#161a22] rounded-xl border border-[#282e39]">
+<div class="p-4 flex items-center justify-between border-b border-[#282e39] bg-[#1c212c] rounded-t-xl sticky top-0 z-10">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></div>
+<h2 class="text-white text-sm font-bold uppercase tracking-wider">En cours</h2>
+<span class="ml-1 px-2 py-0.5 rounded-full bg-[#282e39] text-[#9da6b9] text-xs font-bold">1</span>
+</div>
+<button class="text-[#9da6b9] hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-3 flex flex-col gap-3">
+<div class="kanban-card group p-4 bg-[#1c212c] hover:bg-[#222836] border border-[#282e39] hover:border-yellow-500/50 rounded-lg transition-all duration-200 cursor-grab active:cursor-grabbing shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-yellow-500"></div>
+<div class="flex items-start justify-between mb-2 pl-2">
+<span class="text-yellow-500 text-[10px] font-bold uppercase tracking-wide flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">timelapse</span> Active
+                                </span>
+<button class="opacity-0 group-hover:opacity-100 text-[#9da6b9] hover:text-white transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">more_horiz</span>
+</button>
+</div>
+<h3 class="text-white font-medium text-sm leading-snug mb-3 pl-2">Rédaction contenu "À propos"</h3>
+<div class="flex items-center justify-between pt-2 border-t border-[#282e39] pl-2">
+<div class="flex items-center gap-1.5 text-[#9da6b9]">
+<span class="material-symbols-outlined text-[14px]">play_circle</span>
+<span class="text-xs">2j</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full ring-2 ring-[#1c212c]" data-alt="Portrait of task assignee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwnuNiuk1kf1TbNDRFa6rt31MnOOqJKDz8sjJ3NieOfzMwifmG0dWKs5EfhK3kVHG8ZlOavhz8NDyL0g76ncT24N_RtBo3PIbdt0KxmiOvBsF2mo5grbLRRtJiqdhxfn85G1AbOwysvYnkE3nLq1PvQQK-6LxXPM5ZzUM9V9WLOQ_EsKXcHJkgz_DX6bZFyeTJKtvsj-UeRmyA5Lqgcrb-0tu5fTBRcJCNgZeSKCypa_ud1edv5e5YHaccz3PXIEewBUMnGmVV-_xN"/>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col h-full w-[350px] flex-shrink-0 bg-[#161a22] rounded-xl border border-[#282e39] opacity-90">
+<div class="p-4 flex items-center justify-between border-b border-[#282e39] bg-[#1c212c] rounded-t-xl sticky top-0 z-10">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<h2 class="text-white text-sm font-bold uppercase tracking-wider">Terminé</h2>
+<span class="ml-1 px-2 py-0.5 rounded-full bg-[#282e39] text-[#9da6b9] text-xs font-bold">1</span>
+</div>
+<button class="text-[#9da6b9] hover:text-white transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-3 flex flex-col gap-3">
+<div class="kanban-card group p-4 bg-[#1c212c]/60 hover:bg-[#222836]/80 border border-[#282e39] rounded-lg transition-all duration-200 cursor-grab active:cursor-grabbing shadow-sm relative">
+<div class="flex items-start justify-between mb-2">
+<span class="text-green-500 text-[10px] font-bold uppercase tracking-wide border border-green-500/20 bg-green-500/10 px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check</span> Fait
+                                </span>
+<button class="opacity-0 group-hover:opacity-100 text-[#9da6b9] hover:text-white transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">more_horiz</span>
+</button>
+</div>
+<h3 class="text-[#9da6b9] line-through font-medium text-sm leading-snug mb-3">Réunion de lancement (Kick-off)</h3>
+<div class="flex items-center justify-between pt-2 border-t border-[#282e39]/50">
+<div class="flex items-center gap-1.5 text-[#9da6b9]/70">
+<span class="material-symbols-outlined text-[14px]">history</span>
+<span class="text-xs">Hier</span>
+</div>
+<img alt="Assignee" class="w-6 h-6 rounded-full grayscale ring-2 ring-[#1c212c]" data-alt="Portrait of task assignee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzx1LlhQ1GC0Y8pgO93o2hS4b1pFSM0bXSRlTTyUCS8V3XvAfrPTT2patEn3CEHwQkEnnl8L0nbuykb_J2LzusvBqPZ2wk_5YidE-FV9QZpOPGnmfISWmeok_yKLzekrzgqiEA-ZF7ofnk04a20QgH3h1mU3Puedf89cipsXgpCVBiMqUMUguJgMThwQ7FiZyADlgPsvOobqOKYoEb359ItisLnQouEnXNbjMVLEVMOrTiSS_jllvEZYe9S1SI8MZ9DCCrBTkuByRN"/>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-none pt-2">
+<button class="flex items-center gap-2 px-4 py-3 rounded-xl border border-[#282e39] border-dashed hover:border-[#3b4354] bg-[#161a22]/50 hover:bg-[#161a22] text-[#9da6b9] hover:text-white transition-all w-[350px]">
+<span class="material-symbols-outlined text-2xl">add</span>
+<span class="font-bold text-sm">Ajouter une liste</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

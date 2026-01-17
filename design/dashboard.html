@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tableau de bord des projets - PMT</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "surface-dark": "#181e29",
+              "sidebar-dark": "#111318",
+              "border-dark": "#2f3646"
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill-1 {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for better aesthetic in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #2f3646; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white h-screen overflow-hidden flex">
+<!-- Sidebar Navigation -->
+<aside class="hidden w-72 flex-col border-r border-gray-200 bg-white dark:border-border-dark dark:bg-sidebar-dark lg:flex transition-colors duration-300">
+<!-- Logo Header -->
+<div class="flex h-20 items-center px-6">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-blue-600 text-white font-black text-xl shadow-lg shadow-blue-900/20">
+                    P
+                </div>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold tracking-tight leading-none dark:text-white text-slate-900">PMT</h1>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Gestion de projet</span>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-1 flex-col gap-1.5 overflow-y-auto px-4 py-4">
+<p class="px-3 mb-2 text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Menu Principal</p>
+<a class="group flex items-center gap-3 rounded-xl bg-primary/10 px-3 py-3 text-primary transition-all" href="#">
+<span class="material-symbols-outlined fill-1">dashboard</span>
+<span class="text-sm font-bold">Tableau de bord</span>
+</a>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">folder</span>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Projets</span>
+</a>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<div class="relative">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">check_circle</span>
+<span class="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-sidebar-dark"></span>
+</div>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Tâches</span>
+</a>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">description</span>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Documents</span>
+</a>
+<p class="px-3 mt-6 mb-2 text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Outils</p>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Paramètres</span>
+</a>
+<a class="group flex items-center gap-3 rounded-xl px-3 py-3 text-slate-500 hover:bg-slate-100 dark:text-[#9da6b9] dark:hover:bg-[#282e39] transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">help</span>
+<span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Aide &amp; Support</span>
+</a>
+</nav>
+<!-- User Profile (Bottom) -->
+<div class="border-t border-gray-200 p-4 dark:border-border-dark">
+<div class="flex items-center gap-3 rounded-xl p-2 hover:bg-slate-100 dark:hover:bg-[#282e39] cursor-pointer transition-colors">
+<div class="relative h-10 w-10 overflow-hidden rounded-full border border-gray-200 dark:border-gray-700">
+<img alt="Avatar de l'utilisateur" class="h-full w-full object-cover" data-alt="Portrait of Alex Martin, project manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQEQnaGliHbug277EM_6hFcL4vrClQ4NJ6Ephuwy8CFGy8sisHwNwXTz6yamzSbWHvtJQS__AiSDQJgA5o686dBKIP9xqCAF2lBTabVOvMdwKTYtYg3Zg3WRQ96EG20NNVnIccIPPIugPa08xQZRaNXjFOkuBixf050a9Ztsmkwg9XTBY2pbl6LPfBlIE4IT6HKkUG2VDqmD2NM80PYOLaJT_x0LPG4DMMWtktVYgCcDIee5U0OdaxKQcUL_AIbLvJ8Us7FGMs9cal"/>
+<span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white dark:ring-sidebar-dark"></span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<p class="truncate text-sm font-bold dark:text-white">Alex Martin</p>
+<p class="truncate text-xs text-slate-500 dark:text-[#9da6b9]">alex.m@pmt.com</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-slate-400 text-lg">expand_more</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex flex-1 flex-col overflow-hidden relative">
+<!-- Top Bar / Header -->
+<header class="sticky top-0 z-20 flex flex-col gap-4 border-b border-gray-200 bg-white/80 px-6 py-4 backdrop-blur-md dark:border-border-dark dark:bg-background-dark/80 lg:h-24 lg:flex-row lg:items-center lg:justify-between lg:py-0">
+<!-- Mobile Menu Button & Title -->
+<div class="flex items-center gap-4">
+<button class="lg:hidden rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:text-white dark:hover:bg-surface-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex flex-col">
+<h2 class="text-2xl font-black tracking-tight dark:text-white">Bonjour, Alex 👋</h2>
+<p class="text-sm font-medium text-slate-500 dark:text-[#9da6b9] hidden sm:block">Voici ce qui se passe sur vos projets aujourd'hui.</p>
+</div>
+</div>
+<!-- Search & Primary Action -->
+<div class="flex flex-1 flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 sm:gap-6">
+<!-- Search -->
+<div class="relative w-full sm:max-w-xs">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">search</span>
+</div>
+<input class="block w-full rounded-xl border-none bg-slate-100 py-2.5 pl-10 pr-3 text-sm text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-primary dark:bg-surface-dark dark:text-white dark:placeholder-slate-500 shadow-sm" placeholder="Rechercher un projet, une tâche..." type="text"/>
+</div>
+<!-- Notifications & Button -->
+<div class="flex items-center gap-3">
+<button class="relative rounded-xl p-2.5 text-slate-500 hover:bg-slate-100 transition-colors dark:text-slate-400 dark:hover:bg-surface-dark">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-background-dark"></span>
+</button>
+<button class="flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-transform hover:scale-[1.02] active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="whitespace-nowrap">Nouveau Projet</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-6 lg:p-10">
+<div class="mx-auto max-w-7xl flex flex-col gap-8">
+<!-- KPI Stats Row -->
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
+<!-- Stat Card 1 -->
+<div class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 transition-all hover:border-primary/30 dark:border-border-dark dark:bg-surface-dark">
+<div class="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 rounded-full bg-blue-500/5 blur-2xl transition-all group-hover:bg-blue-500/10"></div>
+<div class="flex flex-col gap-4 relative z-10">
+<div class="flex items-center justify-between">
+<p class="text-sm font-semibold text-slate-500 dark:text-[#9da6b9]">Projets Actifs</p>
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-primary dark:bg-primary/20">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+</div>
+</div>
+<div>
+<p class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">12</p>
+<div class="mt-1 flex items-center gap-1 text-xs font-medium text-emerald-500">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+2 ce mois-ci</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 transition-all hover:border-orange-500/30 dark:border-border-dark dark:bg-surface-dark">
+<div class="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 rounded-full bg-orange-500/5 blur-2xl transition-all group-hover:bg-orange-500/10"></div>
+<div class="flex flex-col gap-4 relative z-10">
+<div class="flex items-center justify-between">
+<p class="text-sm font-semibold text-slate-500 dark:text-[#9da6b9]">Tâches Urgentes</p>
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50 text-orange-500 dark:bg-orange-500/20">
+<span class="material-symbols-outlined text-[20px]">priority_high</span>
+</div>
+</div>
+<div>
+<p class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">5</p>
+<div class="mt-1 flex items-center gap-1 text-xs font-medium text-slate-400">
+<span>À traiter dans les 48h</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 transition-all hover:border-purple-500/30 dark:border-border-dark dark:bg-surface-dark">
+<div class="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 rounded-full bg-purple-500/5 blur-2xl transition-all group-hover:bg-purple-500/10"></div>
+<div class="flex flex-col gap-4 relative z-10">
+<div class="flex items-center justify-between">
+<p class="text-sm font-semibold text-slate-500 dark:text-[#9da6b9]">Documents Récents</p>
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 text-purple-500 dark:bg-purple-500/20">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+</div>
+<div>
+<p class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">8</p>
+<div class="mt-1 flex items-center gap-1 text-xs font-medium text-slate-400">
+<span>Mis à jour aujourd'hui</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 gap-8 xl:grid-cols-3">
+<!-- Left Section: Projects Grid (Takes 2/3 on large screens) -->
+<div class="flex flex-col gap-6 xl:col-span-2">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Projets en cours</h3>
+<a class="flex items-center gap-1 text-sm font-bold text-primary hover:text-blue-400 transition-colors" href="#">
+                                Voir tout <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+<!-- Project Card: Redesign -->
+<div class="group flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-md dark:border-border-dark dark:bg-surface-dark dark:hover:border-primary/40">
+<div class="mb-4 flex items-start justify-between">
+<div class="flex gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400">
+<span class="material-symbols-outlined">smartphone</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">App Mobile V2</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">TechFlow Inc.</p>
+</div>
+</div>
+<span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-bold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">En cours</span>
+</div>
+<div class="mb-4 flex-1">
+<div class="flex justify-between text-xs font-medium text-slate-500 dark:text-slate-400 mb-2">
+<span>Progression</span>
+<span class="text-slate-900 dark:text-white">75%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+<div class="h-full w-3/4 rounded-full bg-primary transition-all duration-1000 ease-out" style="width: 75%"></div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-gray-100 pt-4 dark:border-border-dark">
+<div class="flex -space-x-2">
+<img alt="Portrait of team member Sarah" class="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-surface-dark" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmNvlu4--6RqIfQhqPcPlqzj7SdmB0tHRcu_1jxDpBNZOJfRggtd1H3GuCZ39xSiGZ-zlYcE3Hp7IlycYvc5LEoako4mG7stHU3aWZ-mudSy2aXMWXxSc2uwH29dGTq9TQINGY7dDraqV5PeEEIB9qa9F_AeyuC-HXxtkgp5dGmIJp9cYZ54ceTUdEYqc6OcpgLgCh6OXXvp4jA7D3xZYpcQSC2-aO_RAhwCowsXjKVK6GoYGu1czsSjdMwkqbG1XrLAhDu2LqsbcH"/>
+<img alt="Portrait of team member Mike" class="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-surface-dark" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1qAywJu-fVW2e7ZzDu4_q25jsi9VeNTH6cpViq0yoHnWDFuJJ1Ujkf0RB1ju51FvyiyeFPaqGRQnbd--5b4j3Ir91HMi3nxOD_btdTAk-2WOaV3CVR4QH1QXmjEEDUaqT5AHB8kqW3fQszUzjXh30Buann28-p0BanS21aed5cDq2j9xRQx4rqrMCM_pfbOddo9JTTHgy-tme5fzkpkBWzjB65vhrHg6YdxY9GnjJvcMmEg2Wzrn_igryn752EbMhcdpLhCC2PzJI"/>
+<div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-slate-100 text-xs font-bold text-slate-600 dark:border-surface-dark dark:bg-slate-700 dark:text-slate-300">+2</div>
+</div>
+<div class="flex items-center gap-1 rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>24 Oct</span>
+</div>
+</div>
+</div>
+<!-- Project Card: Marketing -->
+<div class="group flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-md dark:border-border-dark dark:bg-surface-dark dark:hover:border-primary/40">
+<div class="mb-4 flex items-start justify-between">
+<div class="flex gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-pink-50 text-pink-600 dark:bg-pink-500/20 dark:text-pink-400">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Campagne Q4</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Interne</p>
+</div>
+</div>
+<span class="rounded-full bg-orange-100 px-2.5 py-1 text-xs font-bold text-orange-700 dark:bg-orange-500/10 dark:text-orange-400">Révision</span>
+</div>
+<div class="mb-4 flex-1">
+<div class="flex justify-between text-xs font-medium text-slate-500 dark:text-slate-400 mb-2">
+<span>Progression</span>
+<span class="text-slate-900 dark:text-white">45%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+<div class="h-full w-[45%] rounded-full bg-orange-500 transition-all duration-1000 ease-out"></div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-gray-100 pt-4 dark:border-border-dark">
+<div class="flex -space-x-2">
+<img alt="Portrait of team member Jessica" class="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-surface-dark" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAESZXKkH2k-27625OfiC7TS5VA3WwVUsz2WdB-tIZsHQNza_kvUmn3uSwasAPatTZM_NMO9d2YP8kPkqIGFAobSyQSju4g6m0U6Vmfs0IykEyiHuo1B8TuJQIdDjviw4PYMxjsQKvWkWfQL-LF44h_cuK7LbTs_sbY1lLRaiF9DL0PSQ8eyviETKsM-yydSSD4yrClhLHA9rLTqf9A8esu3gbDgwcOSUdOwSGduwUaRE6NiEzzycl8vTlgsHrxUHx5oDSA4Cz_mXsc"/>
+</div>
+<div class="flex items-center gap-1 rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>30 Oct</span>
+</div>
+</div>
+</div>
+<!-- Project Card: Website -->
+<div class="group flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-md dark:border-border-dark dark:bg-surface-dark dark:hover:border-primary/40">
+<div class="mb-4 flex items-start justify-between">
+<div class="flex gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-50 text-teal-600 dark:bg-teal-500/20 dark:text-teal-400">
+<span class="material-symbols-outlined">language</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Site Web Corp</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Client: ShopFast</p>
+</div>
+</div>
+<span class="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-bold text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">Briefing</span>
+</div>
+<div class="mb-4 flex-1">
+<div class="flex justify-between text-xs font-medium text-slate-500 dark:text-slate-400 mb-2">
+<span>Progression</span>
+<span class="text-slate-900 dark:text-white">10%</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+<div class="h-full w-[10%] rounded-full bg-teal-500 transition-all duration-1000 ease-out"></div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-gray-100 pt-4 dark:border-border-dark">
+<div class="flex -space-x-2">
+<img alt="Portrait of team member David" class="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-surface-dark" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMY3JOVb4_7V74mHUZd0wPYc92f4a-ORq9NFi2vS7gjL6QeAPYF-sdA2mDCQEW3b6OcrchiG0fnD43l6hobliCjuoLHG97h8Hw6fjYGPl8giiVN38O_8IZOtLKcwcsMsrNHWvWxfzaH45V5pH9PxCIcnUNlScW82_wlj4RRce5xbUTXfgXYxHECNBT5PzEHQ2U3-dvlr9_hxT-1uTWIDUXhdj0OlrlnV71VIbzL2YobCD2zI6I0wT-J2DjH9-glmjrkx_PQVaG5NLQ"/>
+<img alt="Portrait of team member Anna" class="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-surface-dark" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXQbVEWPA3xSKLkvtLkfPjteCF6PhwYpZVip-qgNxs047CGhDcXQ6iBDT-SDeqgVutLYIrGF747VYKH6nNfSY8s1t0sA-ACSwXyGe8ih9R7QUoCPfKmJxxASZvrxJAxkQXTRdkDS4qGMuLLxCqlMqofRZ4Ck5wPFcfGy9OR0v6NO4ukraBkXrNC-xAz5jEO4W1TZ4vMohBiJ7SFmARmtL2ThoGAnp7uOKX0pXGoOMFinLSUCrCjp7VmYbVsrfwotCTDpunWudQt-48"/>
+</div>
+<div class="flex items-center gap-1 rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>15 Nov</span>
+</div>
+</div>
+</div>
+<!-- New Project Button Card -->
+<button class="group flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50/50 p-5 transition-all hover:border-primary hover:bg-primary/5 dark:border-gray-700 dark:bg-surface-dark/30 dark:hover:border-primary">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm transition-transform group-hover:scale-110 dark:bg-surface-dark">
+<span class="material-symbols-outlined text-primary text-[28px]">add</span>
+</div>
+<h4 class="mt-3 text-sm font-bold text-slate-700 dark:text-white">Créer un nouveau projet</h4>
+<p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Lancez une nouvelle initiative</p>
+</button>
+</div>
+</div>
+<!-- Right Section: Tasks & Documents (Takes 1/3 on large screens) -->
+<div class="flex flex-col gap-6 xl:col-span-1">
+<!-- Tasks List -->
+<div class="flex flex-col rounded-2xl border border-gray-200 bg-white dark:border-border-dark dark:bg-surface-dark">
+<div class="flex items-center justify-between border-b border-gray-100 p-5 dark:border-border-dark">
+<h3 class="font-bold text-slate-900 dark:text-white">À faire aujourd'hui</h3>
+<button class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-primary dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="flex flex-col p-2">
+<!-- Task Item 1 -->
+<label class="group flex cursor-pointer items-start gap-3 rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-[#282e39] transition-colors">
+<input class="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800" type="checkbox"/>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 decoration-slate-400 group-hover:text-primary peer-checked:line-through dark:text-slate-200">Finaliser le budget prévisionnel</span>
+<div class="mt-1 flex items-center gap-2">
+<span class="inline-block h-1.5 w-1.5 rounded-full bg-red-500"></span>
+<span class="text-xs text-slate-400">App Mobile V2 • 10:00</span>
+</div>
+</div>
+</label>
+<!-- Task Item 2 -->
+<label class="group flex cursor-pointer items-start gap-3 rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-[#282e39] transition-colors">
+<input class="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800" type="checkbox"/>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 decoration-slate-400 group-hover:text-primary peer-checked:line-through dark:text-slate-200">Relancer validation client</span>
+<div class="mt-1 flex items-center gap-2">
+<span class="inline-block h-1.5 w-1.5 rounded-full bg-orange-500"></span>
+<span class="text-xs text-slate-400">Campagne Q4 • 14:00</span>
+</div>
+</div>
+</label>
+<!-- Task Item 3 -->
+<label class="group flex cursor-pointer items-start gap-3 rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-[#282e39] transition-colors">
+<input checked="" class="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800" type="checkbox"/>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 line-through decoration-slate-400 opacity-60 group-hover:text-primary dark:text-slate-200">Revue design système</span>
+<div class="mt-1 flex items-center gap-2 opacity-60">
+<span class="inline-block h-1.5 w-1.5 rounded-full bg-green-500"></span>
+<span class="text-xs text-slate-400">Interne • 09:30</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Documents List -->
+<div class="flex flex-col rounded-2xl border border-gray-200 bg-white dark:border-border-dark dark:bg-surface-dark">
+<div class="flex items-center justify-between border-b border-gray-100 p-5 dark:border-border-dark">
+<h3 class="font-bold text-slate-900 dark:text-white">Documents récents</h3>
+<a class="text-xs font-bold text-primary hover:underline" href="#">Voir tout</a>
+</div>
+<div class="flex flex-col gap-1 p-2">
+<!-- Doc Item 1 -->
+<div class="group flex items-center justify-between rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-[#282e39] transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-500 dark:bg-red-500/20">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="truncate text-sm font-medium text-slate-700 dark:text-white group-hover:text-primary transition-colors">Cahier_des_charges.pdf</span>
+<span class="text-xs text-slate-400">Il y a 2h • 4.2 MB</span>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- Doc Item 2 -->
+<div class="group flex items-center justify-between rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-[#282e39] transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-500 dark:bg-blue-500/20">
+<span class="material-symbols-outlined">article</span>
+</div>
+<div class="flex flex-col">
+<span class="truncate text-sm font-medium text-slate-700 dark:text-white group-hover:text-primary transition-colors">Brief_Client_V2.docx</span>
+<span class="text-xs text-slate-400">Hier • 1.8 MB</span>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- Doc Item 3 -->
+<div class="group flex items-center justify-between rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-[#282e39] transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-50 text-green-500 dark:bg-green-500/20">
+<span class="material-symbols-outlined">table_view</span>
+</div>
+<div class="flex flex-col">
+<span class="truncate text-sm font-medium text-slate-700 dark:text-white group-hover:text-primary transition-colors">Budget_Q4.xlsx</span>
+<span class="text-xs text-slate-400">2 jours • 800 KB</span>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

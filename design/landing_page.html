@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PMT - Fluid Project Management</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display overflow-x-hidden">
+<div class="relative flex flex-col min-h-screen w-full">
+<!-- Navbar -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-solid border-b-[#f0f2f4] dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-10 py-3">
+<div class="flex items-center gap-4 text-[#111318] dark:text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">layers</span>
+</div>
+<h2 class="text-[#111318] dark:text-white text-xl font-bold leading-tight tracking-tight">PMT</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-[#111318] dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">Features</a>
+<a class="text-[#111318] dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">Use Cases</a>
+<a class="text-[#111318] dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">Pricing</a>
+</div>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary hover:bg-blue-700 text-white text-sm font-bold transition-all shadow-md hover:shadow-lg">
+<span class="truncate">Get Started</span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-10 md:py-20">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<div class="@container">
+<div class="flex flex-col gap-10 px-4 md:px-0 lg:flex-row items-center">
+<div class="flex flex-col gap-6 lg:w-1/2 justify-center text-center lg:text-left">
+<div class="flex flex-col gap-4">
+<h1 class="text-[#111318] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl lg:text-6xl">
+                                    Fluid Project Management for the <span class="text-primary">Modern Mind</span>
+</h1>
+<h2 class="text-[#616f89] dark:text-gray-300 text-lg font-normal leading-relaxed md:text-xl">
+                                    The lightweight tool for tasks and documents. Perfect for solo creators and agile teams who value focus over clutter.
+                                </h2>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-8 bg-primary hover:bg-blue-700 text-white text-base font-bold transition-all shadow-lg hover:shadow-primary/30">
+<span class="truncate">Start for Free</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-8 bg-white dark:bg-gray-800 text-[#111318] dark:text-white border border-[#dbdfe6] dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-base font-bold transition-all">
+<span class="truncate">Watch Demo</span>
+</button>
+</div>
+</div>
+<div class="w-full lg:w-1/2 aspect-video bg-cover bg-center rounded-2xl shadow-2xl shadow-gray-200/50 dark:shadow-none overflow-hidden border border-gray-100 dark:border-gray-800" data-alt="Clean and modern dashboard interface showing a kanban board with colorful tags and a document sidebar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBtSRo1iOzj-GKqPCOseMkLNRaQ4FulfaRxdoxy168ol4ey2o0601YdGMn4LdHNQ5HiiUxb-d7wdFUwuYAx1EWCpxDnBM2EQ2g9GUpDl_Tq1DXdAyUuUT6YAZLl57O7BuOqp29fS0aVAGnPJqHHq8wvcb0391ARbhbI2tEiTjzn0TY-aT-FxeHfa9Sk20s19P4u5JBwdLtYPdwiUXIR5vDAw-Xnj7Ppjefy-MHt-uH4irEGTh99YS-oJvNro7ywlilgISZ8g0HAHLm_");'>
+<div class="w-full h-full bg-gradient-to-tr from-primary/10 to-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Value Proposition Section -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-10 bg-white dark:bg-gray-900/50">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<div class="flex flex-col gap-10 px-4 py-10">
+<div class="text-center max-w-[720px] mx-auto">
+<h2 class="text-primary font-bold tracking-wider uppercase text-sm mb-2">Philosophy</h2>
+<h1 class="text-[#111318] dark:text-white tracking-tight text-3xl font-bold leading-tight md:text-4xl">
+                            Experience the Flow
+                        </h1>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-0">
+<!-- Card 1 -->
+<div class="flex flex-1 gap-4 rounded-2xl border border-[#dbdfe6] dark:border-gray-800 bg-[#fbfbfc] dark:bg-gray-800/50 p-6 flex-col hover:shadow-lg transition-shadow duration-300">
+<div class="text-primary size-12 flex items-center justify-center rounded-full bg-primary/10">
+<span class="material-symbols-outlined text-2xl">flight</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-[#111318] dark:text-white text-xl font-bold leading-tight">Lightweight</h2>
+<p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-relaxed">Instantly responsive interface that never slows you down. Built for speed and simplicity.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-1 gap-4 rounded-2xl border border-[#dbdfe6] dark:border-gray-800 bg-[#fbfbfc] dark:bg-gray-800/50 p-6 flex-col hover:shadow-lg transition-shadow duration-300">
+<div class="text-primary size-12 flex items-center justify-center rounded-full bg-primary/10">
+<span class="material-symbols-outlined text-2xl">water_drop</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-[#111318] dark:text-white text-xl font-bold leading-tight">Fluid</h2>
+<p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-relaxed">Smooth transitions and intuitive drag-and-drop mechanics that feel natural.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-1 gap-4 rounded-2xl border border-[#dbdfe6] dark:border-gray-800 bg-[#fbfbfc] dark:bg-gray-800/50 p-6 flex-col hover:shadow-lg transition-shadow duration-300">
+<div class="text-primary size-12 flex items-center justify-center rounded-full bg-primary/10">
+<span class="material-symbols-outlined text-2xl">palette</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-[#111318] dark:text-white text-xl font-bold leading-tight">Expressive</h2>
+<p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-relaxed">Design that adapts to your way of thinking and working, not the other way around.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Features Split Section -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-10 md:py-20">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<div class="flex flex-col gap-10 px-4 py-10">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<h1 class="text-[#111318] dark:text-white tracking-tight text-3xl font-bold leading-tight md:text-4xl max-w-[600px]">
+                            Everything you need,<br/> nothing you don't.
+                        </h1>
+<p class="text-[#616f89] dark:text-gray-400 max-w-md text-base md:text-lg">
+                            We stripped away the complexity to leave you with the two pillars of productivity.
+                        </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+<!-- Feature 1 -->
+<div class="flex flex-col gap-6 rounded-3xl bg-white dark:bg-gray-800 p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-700">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl border border-gray-100 dark:border-gray-700" data-alt="Kanban board style task management interface with cards being moved" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJPIUIJsMMFD9EIYlvwrcmvM6PlRE7pWm7PMmpL6cUqslUahTSedAhxmC1Z_RMIQH5QhF6h17vxnox8PkDPjolaCDnlRMLcbKKENKK0-Nwc_LMFZNrzjhFDGpHEepat-7yFfOIHQbY0sSsEN3S7MhRZfMFxyXI9gwd2Ji_CI7LfsqBETfNL38C35pq8oaisSoTfShPUu6PRd6o1kXC8XnopTbY7gTYWajSWbKz1NUMJiYmYh4-a6AsxQdABOXHfe4GMuQdSvoLaOMQ");'></div>
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<h3 class="text-[#111318] dark:text-white text-2xl font-bold leading-normal">Task Management</h3>
+</div>
+<p class="text-[#616f89] dark:text-gray-300 text-base font-normal leading-relaxed">
+                                    Visualize progress instantly. Kanban boards, lists, and timelines that just work without configuration fatigue.
+                                </p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="flex flex-col gap-6 rounded-3xl bg-white dark:bg-gray-800 p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-700">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl border border-gray-100 dark:border-gray-700" data-alt="Grid view of document files and folders with clean icons" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPm-mtdrLBCT3AMXFqxoWfiLhISmWz5_Quzis6yqiwrRDgu2MxeYvaVB-Gj8W-4gzkatCAcBdrALXyhrMhHW-X89rG16TTO2FYyyh6adugotA25mTMleSFAWztmqlMAk7I75AdnioRAhoPtNDODAa9oCrrWqAn4jVT6mrkkyKtDwyxzD6XfdVZtyxpVXsOgCtoGWZpuxYA08XJYd9GzUs5M2eTAH-7Uub48kXPFfPweT2fn6Om4mEQIoIket2E1Q6rWESFoiL6vStu");'></div>
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">description</span>
+<h3 class="text-[#111318] dark:text-white text-2xl font-bold leading-normal">Document Management</h3>
+</div>
+<p class="text-[#616f89] dark:text-gray-300 text-base font-normal leading-relaxed">
+                                    Contextual storage. Keep your specs, briefs, and assets right where you work, linked directly to your tasks.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Use Cases Section -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-20 bg-[#f0f2f4] dark:bg-gray-900">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 text-center">
+<h2 class="text-[#111318] dark:text-white text-3xl font-bold leading-tight mb-8">Adaptable to your role</h2>
+<!-- Toggle Visual (Non-functional CSS only for visual) -->
+<div class="flex justify-center mb-10">
+<div class="flex h-12 w-full max-w-sm items-center justify-center rounded-xl bg-white dark:bg-gray-800 p-1 shadow-sm">
+<div class="flex flex-1 cursor-default h-full items-center justify-center rounded-lg bg-primary/10 text-primary text-sm font-bold">
+                            Solo User
+                        </div>
+<div class="flex flex-1 cursor-default h-full items-center justify-center rounded-lg text-[#616f89] dark:text-gray-400 text-sm font-medium hover:text-[#111318] dark:hover:text-white transition-colors">
+                            Project Manager
+                        </div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+<!-- Solo User Card -->
+<div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border-t-4 border-primary">
+<div class="mb-6 size-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<h3 class="text-xl font-bold text-[#111318] dark:text-white mb-3">For the Solo Creator</h3>
+<p class="text-[#616f89] dark:text-gray-300 mb-6">
+                            Eliminate the noise. Focus on a single stream of work with a minimalist interface that gets out of your way.
+                        </p>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center gap-2 text-sm text-[#111318] dark:text-gray-200">
+<span class="material-symbols-outlined text-green-500 text-lg">check</span>
+                                Personal Kanban
+                            </li>
+<li class="flex items-center gap-2 text-sm text-[#111318] dark:text-gray-200">
+<span class="material-symbols-outlined text-green-500 text-lg">check</span>
+                                Quick-capture notes
+                            </li>
+<li class="flex items-center gap-2 text-sm text-[#111318] dark:text-gray-200">
+<span class="material-symbols-outlined text-green-500 text-lg">check</span>
+                                Distraction-free mode
+                            </li>
+</ul>
+</div>
+<!-- Project Manager Card -->
+<div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border-t-4 border-[#111318] dark:border-gray-500">
+<div class="mb-6 size-12 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[#111318] dark:text-white">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<h3 class="text-xl font-bold text-[#111318] dark:text-white mb-3">For the Project Manager</h3>
+<p class="text-[#616f89] dark:text-gray-300 mb-6">
+                            Gain perspective. Zoom out to see multiple projects, manage team loads, and organize assets across the board.
+                        </p>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center gap-2 text-sm text-[#111318] dark:text-gray-200">
+<span class="material-symbols-outlined text-green-500 text-lg">check</span>
+                                Multi-project Dashboard
+                            </li>
+<li class="flex items-center gap-2 text-sm text-[#111318] dark:text-gray-200">
+<span class="material-symbols-outlined text-green-500 text-lg">check</span>
+                                Team delegation
+                            </li>
+<li class="flex items-center gap-2 text-sm text-[#111318] dark:text-gray-200">
+<span class="material-symbols-outlined text-green-500 text-lg">check</span>
+                                Centralized file vault
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Footer -->
+<div class="px-4 md:px-40 py-20 bg-white dark:bg-background-dark border-t border-[#f0f2f4] dark:border-gray-800">
+<div class="flex flex-col items-center justify-center text-center gap-6 max-w-[600px] mx-auto">
+<h2 class="text-[#111318] dark:text-white text-4xl font-black leading-tight">Ready to get in the flow?</h2>
+<p class="text-[#616f89] dark:text-gray-400 text-lg">Join thousands of creators and managers who have simplified their workflow.</p>
+<div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+<input class="h-12 rounded-xl border border-[#dbdfe6] dark:border-gray-700 bg-white dark:bg-gray-800 px-4 min-w-[280px] focus:outline-none focus:ring-2 focus:ring-primary/50 dark:text-white" placeholder="Enter your email" type="email"/>
+<button class="flex cursor-pointer items-center justify-center rounded-xl h-12 px-8 bg-primary hover:bg-blue-700 text-white text-base font-bold transition-all shadow-lg hover:shadow-primary/30">
+                        Get Started
+                    </button>
+</div>
+<p class="text-xs text-[#9ca3af]">No credit card required. Free plan available forever.</p>
+</div>
+</div>
+<!-- Simple Footer -->
+<footer class="px-4 md:px-40 py-8 bg-[#fbfbfc] dark:bg-gray-900 border-t border-[#f0f2f4] dark:border-gray-800">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">layers</span>
+<span class="text-sm font-bold text-[#111318] dark:text-white">PMT</span>
+</div>
+<div class="flex gap-6 text-sm text-[#616f89] dark:text-gray-400">
+<a class="hover:text-primary" href="#">Privacy</a>
+<a class="hover:text-primary" href="#">Terms</a>
+<a class="hover:text-primary" href="#">Twitter</a>
+</div>
+<div class="text-sm text-[#9ca3af]">© 2023 PMT Inc.</div>
+</div>
+</footer>
+</div>
+</body></html>
